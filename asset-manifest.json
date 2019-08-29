@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/swapi/static/css/main.6aeee6ab.chunk.css",
+    "main.js": "/swapi/static/js/main.8612b4b5.chunk.js",
+    "main.js.map": "/swapi/static/js/main.8612b4b5.chunk.js.map",
+    "runtime~main.js": "/swapi/static/js/runtime~main.1176b128.js",
+    "runtime~main.js.map": "/swapi/static/js/runtime~main.1176b128.js.map",
+    "static/js/2.f989f947.chunk.js": "/swapi/static/js/2.f989f947.chunk.js",
+    "static/js/2.f989f947.chunk.js.map": "/swapi/static/js/2.f989f947.chunk.js.map",
+    "index.html": "/swapi/index.html",
+    "precache-manifest.6f79243343f8e0705fe164fb3f189766.js": "/swapi/precache-manifest.6f79243343f8e0705fe164fb3f189766.js",
+    "service-worker.js": "/swapi/service-worker.js",
+    "static/css/main.6aeee6ab.chunk.css.map": "/swapi/static/css/main.6aeee6ab.chunk.css.map",
+    "static/media/Star_Wars_Logo.svg": "/swapi/static/media/Star_Wars_Logo.0a12a758.svg",
+    "static/media/lightsaber_blue2.png": "/swapi/static/media/lightsaber_blue2.02916d98.png"
+  }
+}
