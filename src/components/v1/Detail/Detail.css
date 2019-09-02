@@ -1,0 +1,39 @@
+.detail-box {
+	height: 100%;
+	flex: 3 1 0;
+	box-sizing: border-box;
+}
+
+.detail-box > h2 {
+	text-align: center;
+}
+
+.columnsBox {
+	height: 85%;
+	overflow-y: auto;
+}
+
+.columns {
+	height: max-content;
+	margin-bottom: 2rem;
+	padding-right: 1rem;
+}
+
+.keyValBox {
+	display: flex;
+}
+
+.detailKey {
+	width: calc(40% - 1rem);
+	padding-right: 1rem;
+	text-align: end;
+	overflow-wrap: break-word;
+}
+
+.detailValue {
+	width: 55%;
+	padding-left: 1rem;
+	border-left: solid #666 3px;
+	text-align: start;
+	overflow-wrap: break-word;
+}
