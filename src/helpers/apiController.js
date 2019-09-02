@@ -23,12 +23,21 @@ const apiController = async (params) => {
 		} else {
 			let dataWithNames = JSON.parse(JSON.stringify(data));
 			dataWithNames.data.results = [];
-			for (let item of results) {
+			let item;
+			for (item of results) {
 				item['name'] = item.title;
 				dataWithNames.data.results.push(item);
 			}
+			console.log(
+				'dataWithNames.data.results',
+				dataWithNames.data.results
+			);
 			dataWithNames.data.results.sort(
 				(a, b) => a.episode_id - b.episode_id
+			);
+			console.log(
+				'dataWithNames.data.results',
+				dataWithNames.data.results
 			);
 			resolve(dataWithNames);
 		}
