@@ -33,7 +33,7 @@ button:hover {
 }
 
 .star-wars > img {
-	/* height: 20vh; */
+	min-height: 100px;
 	height: 100%;
 	width: 30vw;
 }
@@ -61,9 +61,14 @@ button:hover {
 	height: 75%;
 	display: flex;
 	justify-content: space-around;
-	/* overflow-y: auto; */
-	/* background-color: aqua; */
-	/* border-bottom: solid 1px aqua; */
+}
+
+@media screen and (max-width: 600px) {
+	.fetch-content {
+		flex-direction: column;
+		display: flex;
+		justify-content: space-around;
+	}
 }
 
 .loader-wrapper {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import apiController, { categories } from '../../../helpers/apiController';
+import apiController, { categories } from '../helpers/apiController';
 import Detail from '../Detail/Detail';
 import Results from '../Results/Results';
 import Loader from '../Loader/Loader';
