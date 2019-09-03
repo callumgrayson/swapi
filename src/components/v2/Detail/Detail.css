@@ -1,0 +1,45 @@
+.v2detail-box {
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.v2detail-box > h2 {
+	text-align: center;
+	width: 100%;
+}
+
+.v2keyValBox {
+	background-color: #222;
+	width: max-content;
+	max-width: 400px;
+	word-wrap: break-word;
+	margin: .5rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.v2detailKey {
+	margin: 0 .5rem;
+}
+
+.v2detailValue {
+	margin: 0 .5rem;
+}
+
+.v2ListBox {
+	background-color: #222;
+	width: max-content;
+	max-width: 400px;
+	word-wrap: break-word;
+	margin: .5rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+}

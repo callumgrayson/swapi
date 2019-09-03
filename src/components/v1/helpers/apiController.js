@@ -18,9 +18,11 @@ const apiController = async (params) => {
 	return new Promise(async (resolve, reject) => {
 		const data = await memoizedFetch(url);
 		let results = data.data.results;
-		if (results[0].hasOwnProperty('name')) {
+		// console.log('data.data', data.data);
+		if (results[0].hasOwnProperty('name') && searchTerm !== 'films') {
 			resolve(data);
 		} else {
+			// console.log('results', results);
 			let dataWithNames = JSON.parse(JSON.stringify(data));
 			dataWithNames.data.results = [];
 			let item;
@@ -28,17 +30,17 @@ const apiController = async (params) => {
 				item['name'] = item.title;
 				dataWithNames.data.results.push(item);
 			}
-			console.log(
-				'dataWithNames.data.results',
-				dataWithNames.data.results
-			);
+			// console.log(
+			// 	'dataWithNames.data.results',
+			// 	dataWithNames.data.results
+			// );
 			dataWithNames.data.results.sort(
 				(a, b) => a.episode_id - b.episode_id
 			);
-			console.log(
-				'dataWithNames.data.results',
-				dataWithNames.data.results
-			);
+			// console.log(
+			// 	'dataWithNames.data.results',
+			// 	dataWithNames.data.results
+			// );
 			resolve(dataWithNames);
 		}
 	});

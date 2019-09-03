@@ -1,0 +1,21 @@
+.error {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.reset-button {
+	width: 100%;
+	margin-top: 1rem;
+	color: #ccc;
+	background-color: #5a0000;
+	border: none;
+	padding: .3rem;
+	border-radius: .3rem;
+	text-transform: uppercase;
+	outline: none;
+}
+
+.reset-button:hover {
+	background-color: #6b0000;
+}

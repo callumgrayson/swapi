@@ -21,3 +21,24 @@ select:active {
 select:focus {
 	outline: none;
 }
+
+.go-box {
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.go-button {
+	border: none;
+	padding: 1rem 2rem;
+	font-size: 2rem;
+	border: solid 3px;
+	border-radius: 1rem;
+	background-color: black;
+	color: #ccc;
+}
+
+.go-button:hover {
+	background-color: #111;
+}

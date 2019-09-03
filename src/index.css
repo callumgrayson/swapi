@@ -12,6 +12,14 @@ code {
 		monospace;
 }
 
+button,
+button:active {
+	font-family: 'News Cycle', "Roboto", sans-serif;
+	letter-spacing: 1.5px;
+	outline: none;
+	cursor: pointer;
+}
+
 /* width */
 ::-webkit-scrollbar {
 	width: 3px;
