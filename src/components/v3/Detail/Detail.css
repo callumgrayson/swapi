@@ -1,0 +1,48 @@
+.v3-detail-box {
+	height: 100%;
+	box-sizing: border-box;
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: flex-start;
+	align-items: flex-start;
+}
+
+.v3-detail-box > h2 {
+	text-align: center;
+	width: 100%;
+}
+
+.v3-columns-box {
+	display: flex;
+}
+
+.v3-left {
+	text-align: right;
+	margin-right: .5rem;
+	border-right: solid 2px #666;
+	padding-right: 1rem;
+}
+
+.v3-right {
+	text-align: left;
+	margin-left: .5rem;
+}
+
+.v3-ListBox {
+	background-color: #222;
+	width: max-content;
+	max-width: 400px;
+	word-wrap: break-word;
+	margin: .5rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.crawl {
+	margin-top: 1rem;
+	padding-right: 1rem;
+}

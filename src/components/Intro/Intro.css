@@ -1,4 +1,4 @@
-.v1 {
+.intro__welcome-box {
 	box-sizing: border-box;
 	text-align: center;
 	height: 100vh;
@@ -8,55 +8,38 @@
 	/* background-color: yellowgreen; */
 }
 
-header {
-	box-sizing: border-box;
-	height: 25%;
-	padding-bottom: 1rem;
-}
-
-.star-wars {
+.intro__star-wars {
 	/* min-height: 20vh; */
-	height: calc(100% - 40px);
+	height: calc(50% - 40px);
 	background-color: black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.star-wars > img {
+.intro__star-wars > img {
 	/* height: 20vh; */
 	height: 100%;
 	width: 30vw;
 }
 
-.search-button {
-	background-color: #111;
-	color: #ccc;
-	border: none;
-	padding: .5rem;
-	margin: .2rem;
-	border-radius: .3rem;
-}
-
-.search-button:hover {
-	cursor: pointer;
-	background-color: #333;
-}
-
-.search-button:active {
-	outline: none;
-}
-
-.fetch-content {
-	box-sizing: border-box;
-	height: 75%;
+.intro__go-box {
+	height: 200px;
 	display: flex;
-	justify-content: space-around;
-	/* overflow-y: auto; */
-	/* background-color: aqua; */
-	/* border-bottom: solid 1px aqua; */
+	justify-content: center;
+	align-items: center;
 }
 
-.loader-wrapper {
-	min-height: 50vh;
+.intro__go-button {
+	border: none;
+	padding: 1rem 2rem;
+	font-size: 2rem;
+	border: solid 3px;
+	border-radius: 1rem;
+	background-color: black;
+	color: #ccc;
+}
+
+.intro__go-button:hover {
+	background-color: #111;
 }

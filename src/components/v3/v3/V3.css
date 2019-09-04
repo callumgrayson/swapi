@@ -1,0 +1,76 @@
+.v3 {
+	box-sizing: border-box;
+	text-align: center;
+	height: 100vh;
+	color: #aaa;
+	font-weight: bold;
+	letter-spacing: 1px;
+	/* background-color: yellowgreen; */
+}
+
+header {
+	box-sizing: border-box;
+	height: 25%;
+	padding-bottom: 1rem;
+}
+
+button {
+	font-family: 'News Cycle', "Roboto", sans-serif;
+	letter-spacing: 1.5px;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+.star-wars {
+	/* min-height: 20vh; */
+	height: calc(100% - 40px);
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.star-wars > img {
+	min-height: 100px;
+	height: 100%;
+	width: 30vw;
+}
+
+.search-button {
+	background-color: #111;
+	color: #ccc;
+	border: none;
+	padding: .5rem;
+	margin: .2rem;
+	border-radius: .3rem;
+}
+
+.search-button:hover {
+	cursor: pointer;
+	background-color: #333;
+}
+
+.search-button:active {
+	outline: none;
+}
+
+.fetch-content {
+	box-sizing: border-box;
+	height: 75%;
+	display: flex;
+	justify-content: space-around;
+}
+
+@media screen and (max-width: 600px) {
+	.fetch-content {
+		flex-direction: column;
+		display: flex;
+		justify-content: space-around;
+	}
+}
+
+.loader-wrapper {
+	min-height: 50vh;
+}

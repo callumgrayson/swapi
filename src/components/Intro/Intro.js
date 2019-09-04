@@ -1,12 +1,13 @@
 import React from 'react';
+import './Intro.css';
 
 import starWarsLogo from '../../img/Star_Wars_Logo.svg';
 import appConstants from '../../constants.json';
 
 const Intro = ({ setVersion }) => {
 	return (
-		<div className="welcome-box">
-			<div className="star-wars">
+		<div className="intro__welcome-box">
+			<div className="intro__star-wars">
 				<img src={starWarsLogo} alt="Star Wars Logo" />
 			</div>
 
@@ -15,9 +16,9 @@ const Intro = ({ setVersion }) => {
 				Enter and follow your nose for all kinds of Star Wars facts and
 				stats from films 1 - 7.
 			</h3>
-			<div className="go-box">
+			<div className="intro__go-box">
 				<button
-					className="go-button"
+					className="intro__go-button"
 					onClick={(e) => setVersion('2')}
 					style={{
 						borderColor: `${appConstants.SW_COLOR}`
