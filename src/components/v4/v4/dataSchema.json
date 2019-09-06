@@ -10,11 +10,7 @@
 			"director": "George Lucas",
 			"producer": "Rick McCallum",
 			"release_date": "2005-05-19",
-			"characters": {
-				"people_1": "https://swapi.co/api/people/1/",
-				"people_2": "https://swapi.co/api/people/2/",
-				"people_3": "https://swapi.co/api/people/3/"
-			},
+			"characters": [ "people_1", "people_2", "people_3" ],
 			"planets": {
 				"planets_2": "https://swapi.co/api/planets/2/",
 				"planets_5": "https://swapi.co/api/planets/5/",
