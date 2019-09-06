@@ -1,0 +1,16 @@
+.v4_page {
+	display: flex;
+	padding: 2rem;
+}
+
+.v4_terms {
+	width: max-content;
+}
+
+.v4_menu {
+	width: max-content;
+}
+
+.v4_detail {
+	flex: 1;
+}

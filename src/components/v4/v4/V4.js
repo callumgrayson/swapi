@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
+import './V4.css';
+
 import allData from '../allData.json';
 
 const urlCatsByTerm = [
 	'characters',
 	'films',
+	'homeworld',
 	'people',
 	'pilots',
 	'planets',
@@ -34,7 +38,21 @@ const extractIdsFromUrls = (urlsArray) => {
 	// ** args: urls<array>
 	// ** return: ids<array>
 
-	return urlsArray.map((url) => idFromUrl(url));
+	if (Array.isArray(urlsArray)) {
+		urlsArray.forEach((u) => {
+			if (typeof u !== 'string') {
+				console.log('u, urlsArray', u, urlsArray);
+			}
+		});
+
+		return urlsArray.map((url) => idFromUrl(url));
+	} else {
+		if (typeof urlsArray !== 'string') {
+			console.log('urlsArray', urlsArray);
+		}
+
+		return [ idFromUrl(urlsArray) ];
+	}
 };
 
 const categorizeById = (ids) => {
@@ -84,7 +102,6 @@ const V4 = () => {
 			let pageIds = [];
 			let results;
 			let newTermObject = {};
-			let dataToFetch = [];
 
 			if (term === '' || page === 0) {
 				return;
@@ -100,8 +117,8 @@ const V4 = () => {
 				// if (term !== '' && page !== 0) {
 				count = allData[term].count;
 				results = allData[term][page];
-				console.log('fetch triggered: ', term, page, dataId);
-				console.log('results', results);
+				// console.log('fetch triggered: ', term, page, dataId);
+				// console.log('results', results);
 
 				// results are in... Now set url data as ids
 				results.forEach((result) => {
@@ -120,9 +137,6 @@ const V4 = () => {
 								...newTermObject[termId]
 							};
 							newTermObject[termId][keyInResult] = idsFromUrls;
-
-							// set data to dataToFetch
-							dataToFetch = [ ...dataToFetch, ...idsFromUrls ];
 						} else {
 							// and set non-url data as ids
 							newTermObject[termId] = {
@@ -135,8 +149,6 @@ const V4 = () => {
 
 					pageIds.push(termId);
 				});
-
-				const dataToFetchFromFilms = categorizeById(dataToFetch);
 
 				setData((prev) => ({
 					...prev,
@@ -159,9 +171,45 @@ const V4 = () => {
 			}
 
 			const setByDataId = ({ dataId, data, dataTerm }) => {
-				console.log('dataId, data, dataTerm', dataId, data, dataTerm);
+				// setter function simply takes the data and sets it in state
+				// with appropriate checks...
+				// console.log('dataId, data, dataTerm', dataId, data, dataTerm);
+
+				let newTermObject = {};
+
+				Object.keys(data).forEach((keyInResult) => {
+					// extract url-containing data first
+					if (urlCatsByTerm.includes(keyInResult)) {
+						// extract urls from list
+						let idsFromUrls = extractIdsFromUrls(data[keyInResult]);
+
+						// set data to newTermObject &
+						newTermObject[dataId] = {
+							...newTermObject[dataId]
+						};
+						newTermObject[dataId][keyInResult] = idsFromUrls;
+					} else {
+						// and set non-url data as ids
+						newTermObject[dataId] = {
+							...newTermObject[dataId]
+						};
+						newTermObject[dataId][keyInResult] = data[keyInResult];
+					}
+				});
+
+				// Data set here
+				setTimeout(() => {
+					setData((prev) => ({
+						...prev,
+						[dataTerm]: {
+							...prev[dataTerm],
+							...newTermObject
+						}
+					}));
+				}, 2000);
 			};
 
+			// Call starts here ////////////////////////////////////////
 			if (
 				data.hasOwnProperty(term) &&
 				data[term].hasOwnProperty(dataId)
@@ -171,6 +219,14 @@ const V4 = () => {
 				const currentDetail = data[term][dataId];
 				Object.keys(currentDetail).forEach((detailKey) => {
 					if (urlCatsByTerm.includes(detailKey)) {
+						// This is where homeworld needs to be added
+						//
+						//
+						//
+						//
+						//
+						//
+						//
 						let ids = currentDetail[detailKey];
 						ids.forEach((id) => {
 							const [ idTerm ] = id.split('_');
@@ -187,26 +243,20 @@ const V4 = () => {
 					}
 				});
 
-				// console.log('idsToFetch', idsToFetch);
+				console.log('idsToFetch', idsToFetch);
 				// fetch ids
 				idsToFetch.forEach((inId) => {
 					const { id, idTerm } = inId;
 					// console.log('id', id);
-					let dataFromFetch = Object.keys(
-						allData[idTerm]
-					).forEach((page) => {
+					Object.keys(allData[idTerm]).forEach((page) => {
 						if (page === Number.parseInt(page, 10).toString()) {
-							// console.log('page', page);
 							allData[idTerm][page].forEach((item) => {
 								const itemId = idFromUrl(item.url);
 								if (itemId === id) {
-									// console.log(
-									// 	'item, id, itemId',
-									// 	item,
-									// 	id,
-									// 	idTerm
-									// );
-									// setData
+									// We have now found the single item result as
+									// it would come from API
+
+									// send the data to a setter function
 									setByDataId({
 										dataId: id,
 										data: item,
@@ -218,6 +268,7 @@ const V4 = () => {
 					});
 				});
 			}
+			console.log('just finished writing url data...');
 		},
 		[ dataId ]
 	);
@@ -240,6 +291,48 @@ const V4 = () => {
 		return categories.map((cat) => {
 			return <div onClick={() => getTerms(cat)}>{cat}</div>;
 		});
+	};
+
+	const renderPreparedDetail = (inObj) => {
+		console.log('in renderPreparedDetail...');
+
+		const keyConvert = [ 'pilots', 'residents', 'characters' ];
+
+		let singles = [];
+		let arrays = [];
+
+		Object.keys(inObj).forEach((keyInObj) => {
+			if ([ 'created', 'edited', 'url' ].includes(keyInObj)) {
+				return;
+			}
+			if (keyInObj === 'name') {
+				singles.unshift({ [keyInObj]: inObj[keyInObj] });
+			} else if (urlCatsByTerm.includes(keyInObj)) {
+				let dataKey = keyInObj;
+				if (keyConvert.includes(keyInObj)) {
+					dataKey = 'people';
+				}
+				if (keyInObj === 'homeworld') {
+					dataKey = 'planets';
+				}
+				let arrayItems = inObj[keyInObj];
+				let returnItems = [];
+				arrayItems.forEach((item) => {
+					if (
+						data.hasOwnProperty(dataKey) &&
+						data[dataKey].hasOwnProperty(item)
+					) {
+						let itemName = data[dataKey][item].name;
+						returnItems.push({ name: itemName, id: item });
+					}
+				});
+				arrays.push({ [keyInObj]: [ ...returnItems ] });
+			} else {
+				singles.push({ [keyInObj]: inObj[keyInObj] });
+			}
+		});
+
+		return [ ...singles, ...arrays ];
 	};
 
 	const renderMenu = () => {
@@ -301,18 +394,43 @@ const V4 = () => {
 			data[term].hasOwnProperty(dataId) &&
 			Object.keys(data[term][dataId]).length > 0
 		) {
+			let detailData = data[term][dataId];
 			return (
 				<div>
-					<div>Detail goes here</div>
-					{dataId !== 0 && <div>{dataId}</div>}
 					<div>
-						<div>{data[term][dataId].name}</div>
-						<div>{data[term][dataId].url}</div>
-						{/* <div>
-							{data[term][dataId].characters.map((char) => (
-								<div>{char}</div>
-							))}
-						</div> */}
+						{renderPreparedDetail(detailData).map((el) => {
+							// el is an object
+
+							if (Array.isArray(Object.values(el)[0])) {
+								return (
+									<div>
+										<div>{Object.keys(el)[0]}</div>
+										{Object.keys(el).map((val) => {
+											return el[val].map((valInside) => {
+												return (
+													<div
+														onClick={() =>
+															console.log(
+																'needs a handler...'
+															)}
+													>
+														{valInside.name ||
+															'missing...'}
+													</div>
+												);
+											});
+										})}
+									</div>
+								);
+							} else {
+								return (
+									<div>
+										<div>{Object.keys(el)[0]}</div>
+										<div>{Object.values(el)[0]}</div>
+									</div>
+								);
+							}
+						})}
 					</div>
 				</div>
 			);
@@ -320,19 +438,16 @@ const V4 = () => {
 	};
 
 	return (
-		<div>
-			<div>API logic rewrite...</div>
-			<div>
+		<div className="v4_page">
+			<div className="v4_terms">
 				<div>Categories</div>
 				{renderTerms()}
 			</div>
-			<br />
-			<div>
+			<div className="v4_menu">
 				<div>Menu</div>
 				{renderMenu()}
 			</div>
-			<br />
-			<div>
+			<div className="v4_detail">
 				<div>Detail</div>
 				{renderDetail()}
 			</div>
