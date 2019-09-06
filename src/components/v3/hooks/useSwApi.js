@@ -12,24 +12,6 @@ const categories = [
 	'vehicles'
 ];
 
-// const fetchElement = ({ elementObj, apiHook }) => {
-// 	// Only job is to fetch ONE page of ONE term
-// 	const [ element, setElement ] = useState(null);
-// 	const [ isFetchingEl, setIsFetchingEl ] = useState(false);
-// 	const [ errorEl, setErrorEl ] = useState('');
-// 	const { term, page } = elementObj;
-// 	const { data, dataSetter } = apiHook;
-
-// 	// First check if data already contains page
-
-// 	// if it does return it
-
-// 	// if not fetch it
-
-// 	// set fetching to true
-// 	// set error to ""
-// };
-
 const useSwApi = () => {
 	const [ data, setData ] = useState({});
 	const [ isFetching, setIsFetching ] = useState(false);
@@ -96,6 +78,7 @@ const useSwApi = () => {
 
 				try {
 					const data = await memoizedFetch(url, config);
+					console.log('data', data);
 					const dataToSet = handleResults(data);
 					// console.log('dataToSet', dataToSet)
 					// const preparedData = prepareData(dataToSet)
@@ -126,26 +109,3 @@ const useSwApi = () => {
 };
 
 export default useSwApi;
-
-// {
-// 	films<term>: {
-// 		count: 7,
-// 		next: ?,
-// 		previous: ?,
-// 		1<page>: [
-// 			{},
-// 			{},
-// 			...
-// 		]
-// 	},
-// 	people<term>: {
-// 		count: 87,
-// 		next: ?,
-// 		previous: ?,
-// 		1<page>: [
-// 			{},
-// 			{},
-// 			...
-// 		]
-// 	}
-// }
