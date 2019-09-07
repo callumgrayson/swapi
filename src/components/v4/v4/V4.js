@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import './V4.css';
 
+import { ReactComponent as StarWarsLogo } from '../../../img/Star_Wars_Logo.svg';
+
 import allData from '../allData.json';
 
 const urlCatsByTerm = [
@@ -86,10 +88,16 @@ const V4 = () => {
 			) {
 				// set count and results from allData
 				// if (term !== '' && page !== 0) {
+
+				// *****
+				// Here allData is used in place of fetching data
+				//
+				// This will need to be replaced with useSwApi hook
+				//
 				count = allData[term].count;
 				results = allData[term][page];
-				// console.log('fetch triggered: ', term, page, dataId);
-				// console.log('results', results);
+				//
+				// *****
 
 				// results are in... Now set url data as ids
 				results.forEach((result) => {
@@ -232,7 +240,10 @@ const V4 = () => {
 				// fetch ids
 				idsToFetch.forEach((inId) => {
 					const { id, idTerm } = inId;
-					// console.log('id', id);
+
+					// *****
+					// Here allData is used in place of fetching data
+					//
 					Object.keys(allData[idTerm]).forEach((page) => {
 						if (page === Number.parseInt(page, 10).toString()) {
 							allData[idTerm][page].forEach((item) => {
@@ -251,6 +262,8 @@ const V4 = () => {
 							});
 						}
 					});
+					//
+					// *****
 				});
 			}
 			// console.log('just finished writing url data...');
@@ -310,7 +323,7 @@ const V4 = () => {
 						let itemName = data[dataKey][item].name;
 						returnItems.push({ name: itemName, id: item });
 					} else {
-						returnItems.push({ name: item, id: item });
+						returnItems.push({ name: '', id: item });
 					}
 				});
 				arrays.push({ [keyInObj]: [ ...returnItems ] });
@@ -401,13 +414,20 @@ const V4 = () => {
 												].map((valInside) => {
 													return (
 														<div
+															className={
+																valInside.name ? (
+																	'visible'
+																) : (
+																	'hidden'
+																)
+															}
 															onClick={() =>
 																console.log(
 																	'needs a handler...'
 																)}
 														>
 															{valInside.name ||
-																'missing...'}
+																'...'}
 														</div>
 													);
 												});
@@ -436,17 +456,12 @@ const V4 = () => {
 
 	return (
 		<div className="v4_page">
-			<div className="v4_terms">
-				<div>Categories</div>
-				{renderTerms()}
-			</div>
-			<div className="v4_menu">
-				<div>Menu</div>
-				{renderMenu()}
-			</div>
-			<div className="v4_detail">
-				<div>Detail</div>
-				{renderDetail()}
+			<StarWarsLogo className="v4_swLogo" />
+
+			<div className="v4_content">
+				<div className="v4_terms">{renderTerms()}</div>
+				<div className="v4_menu">{renderMenu()}</div>
+				<div className="v4_detail">{renderDetail()}</div>
 			</div>
 		</div>
 	);
