@@ -14,14 +14,14 @@ const formatValue = (str) => {
 		!Number.isNaN(Number.parseFloat(str, 10)) &&
 		Number.parseFloat(str, 10).toString() === str
 	) {
-		console.log('str', str);
+		// console.log('str', str);
 		return Number.parseFloat(str, 10).toLocaleString();
 	}
 	return str;
 };
 
 const getRenderObj = (inObj) => {
-	console.log('inObj', inObj);
+	// console.log('inObj', inObj);
 	const outObj = {
 		name: '',
 		singles: {},
@@ -51,7 +51,7 @@ const getRenderObj = (inObj) => {
 
 	const getIsUrl = (val) => {
 		if (!(typeof val === 'string')) {
-			console.warn('val not string: ', val);
+			// console.warn('val not string: ', val);
 			return null;
 		}
 		return val.includes('https://swapi.co/api/') ? true : false;

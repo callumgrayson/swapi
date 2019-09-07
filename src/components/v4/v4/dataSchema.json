@@ -1,0 +1,70 @@
+{
+	"films": {
+		"page_1": [ "id1", "id2", "id3" ],
+		"films_1": { "key": "value" },
+		"films_2": { "key": "value" },
+		"films_3": {
+			"title": "Revenge of the Sith",
+			"episode_id": 3,
+			"opening_crawl": "War! The Republic ...",
+			"director": "George Lucas",
+			"producer": "Rick McCallum",
+			"release_date": "2005-05-19",
+			"characters": [ "people_1", "people_2", "people_3" ],
+			"planets": {
+				"planets_2": "https://swapi.co/api/planets/2/",
+				"planets_5": "https://swapi.co/api/planets/5/",
+				"planets_8": "https://swapi.co/api/planets/8/"
+			},
+			"starships": {
+				"starships_48": "https://swapi.co/api/starships/48/",
+				"starships_59": "https://swapi.co/api/starships/59/",
+				"starships_61": "https://swapi.co/api/starships/61/"
+			},
+			"vehicles": {
+				"vehicles_33": "https://swapi.co/api/vehicles/33/",
+				"vehicles_50": "https://swapi.co/api/vehicles/50/",
+				"vehicles_53": "https://swapi.co/api/vehicles/53/"
+			},
+			"species": {
+				"species_19": "https://swapi.co/api/species/19/",
+				"species_33": "https://swapi.co/api/species/33/",
+				"species_2": "https://swapi.co/api/species/2/"
+			},
+			"created": "2014-12-20T18:49:38.403000Z",
+			"edited": "2015-04-11T09:45:44.862122Z",
+			"url": "https://swapi.co/api/films/6/",
+			"name": "Revenge of the Sith"
+		}
+	},
+	"people": {
+		"page_1": [ "id1", "id2", "id3" ],
+		"people_1": { "key": "value" },
+		"people_2": { "key": "value" },
+		"people_3": { "key": "value" }
+	},
+	"planets": {
+		"page_1": [ "id1", "id2", "id3" ],
+		"planets_1": { "key": "value" },
+		"planets_2": { "key": "value" },
+		"planets_3": { "key": "value" }
+	},
+	"species": {
+		"page_1": [ "id1", "id2", "id3" ],
+		"species_1": { "key": "value" },
+		"species_2": { "key": "value" },
+		"species_3": { "key": "value" }
+	},
+	"starships": {
+		"page_1": [ "id1", "id2", "id3" ],
+		"starships_1": { "key": "value" },
+		"starships_2": { "key": "value" },
+		"starships_3": { "key": "value" }
+	},
+	"vehicles": {
+		"page_1": [ "id1", "id2", "id3" ],
+		"vehicles_1": { "key": "value" },
+		"vehicles_2": { "key": "value" },
+		"vehicles_3": { "key": "value" }
+	}
+}
