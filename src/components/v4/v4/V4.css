@@ -5,12 +5,32 @@
 
 .v4_terms {
 	width: max-content;
+	padding: 1rem;
 }
 
 .v4_menu {
 	width: max-content;
+	padding: 1rem 2rem;
 }
 
 .v4_detail {
 	flex: 1;
+	padding: 1rem;
+}
+
+.v4_keyValBox {
+	display: flex;
+}
+
+.v4_left {
+	padding-right: 2rem;
+	width: 30%;
+	text-align: right;
+}
+
+.v4_right {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
 }

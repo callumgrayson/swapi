@@ -29,9 +29,16 @@ const idFromUrl = (url) => {
 	// ** args: url<string>
 	// ** return: id<string>
 
-	const [ term, id ] = url.replace('https://swapi.co/api/', '').split('/');
+	if (typeof url === 'string') {
+		const [ term, id ] = url
+			.replace('https://swapi.co/api/', '')
+			.split('/');
 
-	return `${term}_${id}`;
+		return `${term}_${id}`;
+	} else {
+		console.log('url', url);
+		return url;
+	}
 };
 
 const extractIdsFromUrls = (urlsArray) => {
@@ -39,46 +46,10 @@ const extractIdsFromUrls = (urlsArray) => {
 	// ** return: ids<array>
 
 	if (Array.isArray(urlsArray)) {
-		urlsArray.forEach((u) => {
-			if (typeof u !== 'string') {
-				console.log('u, urlsArray', u, urlsArray);
-			}
-		});
-
 		return urlsArray.map((url) => idFromUrl(url));
 	} else {
-		if (typeof urlsArray !== 'string') {
-			console.log('urlsArray', urlsArray);
-		}
-
 		return [ idFromUrl(urlsArray) ];
 	}
-};
-
-const categorizeById = (ids) => {
-	// ** args: ids<array<string>>
-	// ** return: splitIds<object>
-
-	let splitIds = {};
-
-	ids.forEach((id) => {
-		const [ term ] = id.split('_');
-		splitIds = {
-			...splitIds,
-			[term]: {
-				...splitIds[term],
-				[id]: id
-			}
-		};
-	});
-
-	Object.keys(splitIds).forEach((id) => {
-		const count = Object.keys(splitIds[id]).length;
-
-		splitIds[id]['count'] = count;
-	});
-
-	return splitIds;
 };
 
 /////////////////////////////////////////////////////////////////////////
@@ -128,9 +99,12 @@ const V4 = () => {
 						// extract url-containing data first
 						if (urlCatsByTerm.includes(keyInResult)) {
 							// extract urls from list
-							let idsFromUrls = extractIdsFromUrls(
-								result[keyInResult]
-							);
+							let idsFromUrls = [ 'n/a' ];
+							if (result[keyInResult]) {
+								idsFromUrls = extractIdsFromUrls(
+									result[keyInResult]
+								);
+							}
 
 							// set data to newTermObject &
 							newTermObject[termId] = {
@@ -181,7 +155,22 @@ const V4 = () => {
 					// extract url-containing data first
 					if (urlCatsByTerm.includes(keyInResult)) {
 						// extract urls from list
-						let idsFromUrls = extractIdsFromUrls(data[keyInResult]);
+						let idsFromUrls = [ 'unknown' ];
+						if (!data[keyInResult]) {
+							console.log(
+								'keyInResult',
+								keyInResult,
+								data[keyInResult]
+							);
+							console.log(
+								'dataId, data, dataTerm',
+								dataId,
+								data,
+								dataTerm
+							);
+						} else {
+							idsFromUrls = extractIdsFromUrls(data[keyInResult]);
+						}
 
 						// set data to newTermObject &
 						newTermObject[dataId] = {
@@ -219,31 +208,27 @@ const V4 = () => {
 				const currentDetail = data[term][dataId];
 				Object.keys(currentDetail).forEach((detailKey) => {
 					if (urlCatsByTerm.includes(detailKey)) {
-						// This is where homeworld needs to be added
-						//
-						//
-						//
-						//
-						//
-						//
-						//
 						let ids = currentDetail[detailKey];
+						console.log('ids', ids);
 						ids.forEach((id) => {
-							const [ idTerm ] = id.split('_');
-							// console.log('idTerm', idTerm);
-							if (
-								!(
-									data.hasOwnProperty(idTerm) &&
-									data[idTerm].hasOwnProperty(id)
-								)
-							) {
-								idsToFetch.push({ id, idTerm });
+							if (id !== 'n/a') {
+								const [ idTerm ] = id.split('_');
+								if (
+									!(
+										data.hasOwnProperty(idTerm) &&
+										data[idTerm].hasOwnProperty(id)
+									)
+								) {
+									idsToFetch.push({ id, idTerm });
+								}
+							} else {
+								console.log('id', id);
+								console.log('currentDetail', currentDetail);
 							}
 						});
 					}
 				});
 
-				console.log('idsToFetch', idsToFetch);
 				// fetch ids
 				idsToFetch.forEach((inId) => {
 					const { id, idTerm } = inId;
@@ -268,7 +253,7 @@ const V4 = () => {
 					});
 				});
 			}
-			console.log('just finished writing url data...');
+			// console.log('just finished writing url data...');
 		},
 		[ dataId ]
 	);
@@ -294,7 +279,7 @@ const V4 = () => {
 	};
 
 	const renderPreparedDetail = (inObj) => {
-		console.log('in renderPreparedDetail...');
+		// console.log('in renderPreparedDetail...');
 
 		const keyConvert = [ 'pilots', 'residents', 'characters' ];
 
@@ -324,6 +309,8 @@ const V4 = () => {
 					) {
 						let itemName = data[dataKey][item].name;
 						returnItems.push({ name: itemName, id: item });
+					} else {
+						returnItems.push({ name: item, id: item });
 					}
 				});
 				arrays.push({ [keyInObj]: [ ...returnItems ] });
@@ -403,30 +390,40 @@ const V4 = () => {
 
 							if (Array.isArray(Object.values(el)[0])) {
 								return (
-									<div>
-										<div>{Object.keys(el)[0]}</div>
-										{Object.keys(el).map((val) => {
-											return el[val].map((valInside) => {
-												return (
-													<div
-														onClick={() =>
-															console.log(
-																'needs a handler...'
-															)}
-													>
-														{valInside.name ||
-															'missing...'}
-													</div>
-												);
-											});
-										})}
+									<div className="v4_keyValBox">
+										<div className="v4_left">
+											{Object.keys(el)[0]}
+										</div>
+										<div className="v4_right">
+											{Object.keys(el).map((val) => {
+												return el[
+													val
+												].map((valInside) => {
+													return (
+														<div
+															onClick={() =>
+																console.log(
+																	'needs a handler...'
+																)}
+														>
+															{valInside.name ||
+																'missing...'}
+														</div>
+													);
+												});
+											})}
+										</div>
 									</div>
 								);
 							} else {
 								return (
-									<div>
-										<div>{Object.keys(el)[0]}</div>
-										<div>{Object.values(el)[0]}</div>
+									<div className="v4_keyValBox">
+										<div className="v4_left">
+											{Object.keys(el)[0]}
+										</div>
+										<div className="v4_right">
+											{Object.values(el)[0]}
+										</div>
 									</div>
 								);
 							}
