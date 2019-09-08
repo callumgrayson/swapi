@@ -59,7 +59,6 @@ const V4 = () => {
 	const [ term, setTerm ] = useState('');
 	const [ page, setPage ] = useState(1);
 	const [ dataId, setDataId ] = useState('');
-	const [ requestIds, setRequestIds ] = useState([]);
 	const [ data, setData ] = useState({});
 
 	// Basic mechanism:
@@ -143,7 +142,7 @@ const V4 = () => {
 				}));
 			}
 		},
-		[ term, page ]
+		[ term, page, data ]
 	);
 
 	useEffect(
@@ -268,7 +267,7 @@ const V4 = () => {
 			}
 			// console.log('just finished writing url data...');
 		},
-		[ dataId ]
+		[ dataId, data, term ]
 	);
 
 	const getTerms = (term) => {

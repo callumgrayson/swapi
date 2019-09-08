@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import useSwApi from '../hooks/useSwApi';
+import allIdsArray from '../helpers/allIdsArray.json';
 
 import './V5.css';
-
-function getItemId(category, itemNumber) {
-	return `${category}_${itemNumber}`;
-}
+const uuid = require('uuid/v4');
 
 const V5 = () => {
 	const [ listSingles, setListSingles ] = useState([]);
@@ -17,7 +15,7 @@ const V5 = () => {
 				setRequestForSingles(listSingles);
 			}
 		},
-		[ listSingles ]
+		[ listSingles, setRequestForSingles ]
 	);
 
 	const renderSingle = (props) => {
@@ -31,65 +29,81 @@ const V5 = () => {
 		//
 		// *****
 
-		// console.log('props', props);
-		if (props) {
-			const { data, error, isFetching } = props;
+		const getSingleContent = () => {
+			if (props) {
+				const { data: inData, error, isFetching } = props;
 
-			if (isFetching === true) {
-				return <div>...loading...</div>;
-			} else if (error !== '') {
-				return <div>Error: {error}</div>;
-			} else if (Object.keys(data).length > 0) {
-				return <div>{data.name}</div>;
+				if (isFetching === true) {
+					return <div>...loading...</div>;
+				} else if (error && error !== '') {
+					return <div>Error: {error}</div>;
+				} else if (inData && Object.keys(inData).length > 0) {
+					return <div>{inData.name}</div>;
+				}
+			} else {
+				return <div>Nothing to show yet...</div>;
 			}
+		};
+
+		return <div className="single">{getSingleContent()}</div>;
+	};
+
+	function renderIdItem(inItem, inData) {
+		const { category: itemCat, idNumber: itemNum, id: itemId } = inItem;
+		const displayItem = inData[itemCat].items[itemId];
+
+		// if relevant data is in inData
+		if (inData[itemCat].items.hasOwnProperty(itemId)) {
+			// use inData in return
+
+			return (
+				<div
+					key={uuid()}
+					className="v5_single-item"
+					onClick={() => console.log('inItem', inItem)}
+				>
+					{renderSingle(displayItem)}
+				</div>
+			);
 		} else {
-			return <div>Nothing to show yet...</div>;
-		}
-	};
+			// else use inItem in return
 
-	const renderSinglesList = (inList, inData) => {
-		// console.log('inList', inList);
-		console.log('inData', inData);
-		const list = inList.map((item) => {
-			const { category, itemNumber } = item;
-			const itemId = getItemId(category, itemNumber);
-			// console.log('itemId', itemId);
-			let singleData = inData[category].items[itemId];
-			// console.log('singleData', singleData);
-			return singleData;
+			return (
+				<div
+					key={uuid()}
+					className="v5_single-item"
+					onClick={() =>
+						setListSingles([
+							{
+								category: itemCat,
+								itemNumber: itemNum
+							}
+						])}
+				>
+					{inItem.idNumber}
+				</div>
+			);
+		}
+	}
+
+	function renderNumberButtons(inArray) {
+		return inArray.map((cat) => {
+			let catName = cat[0].category;
+			return (
+				<div key={uuid()}>
+					<div>{catName}</div>
+					<div className="v5_singles-box">
+						{cat.map((idItem) => renderIdItem(idItem, data))}
+					</div>
+				</div>
+			);
 		});
-
-		return (
-			<div className="v5_singles-list">
-				{list.length > 0 &&
-					list.map((single) => {
-						return renderSingle(single);
-					})}
-			</div>
-		);
-	};
-
-	const listSingles1 = [
-		{
-			category: 'people',
-			itemNumber: 4
-		},
-		{
-			category: 'starships',
-			itemNumber: 11
-		},
-		{
-			category: 'planets',
-			itemNumber: 14
-		}
-	];
+	}
 
 	return (
 		<div>
-			<button onClick={() => setListSingles(listSingles1)}>
-				Get three singles: /people/4, /starships/11, planets/14
-			</button>
-			{renderSinglesList(listSingles, data)}
+			<div>Fetching single items</div>
+			{renderNumberButtons(allIdsArray)}
 		</div>
 	);
 };

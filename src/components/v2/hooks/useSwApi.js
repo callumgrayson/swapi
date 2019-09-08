@@ -20,49 +20,49 @@ const useSwApi = () => {
 	const [ page, setPage ] = useState(0);
 	const [ detail, setDetail ] = useState({});
 
-	function handleResults(data) {
-		let results = data.data.results;
-
-		if (results[0].hasOwnProperty('name') && term !== 'films') {
-			return data;
-		} else {
-			let dataWithNames = JSON.parse(JSON.stringify(data));
-			dataWithNames.data.results = [];
-
-			let item;
-			for (item of results) {
-				item['name'] = item.title;
-				dataWithNames.data.results.push(item);
-			}
-
-			dataWithNames.data.results.sort(
-				(a, b) => a.episode_id - b.episode_id
-			);
-
-			return dataWithNames;
-		}
-	}
-
-	function dataReducer(prev, dataToReduce) {
-		let termObject = {};
-
-		if (prev.hasOwnProperty(term)) {
-			termObject = { ...prev[term] };
-		} else {
-			termObject = { count: dataToReduce.data.count };
-		}
-
-		return {
-			...prev,
-			[term]: {
-				...termObject,
-				[page]: dataToReduce.data.results
-			}
-		};
-	}
-
 	useEffect(
 		() => {
+			function dataReducer(prev, dataToReduce) {
+				let termObject = {};
+
+				if (prev.hasOwnProperty(term)) {
+					termObject = { ...prev[term] };
+				} else {
+					termObject = { count: dataToReduce.data.count };
+				}
+
+				return {
+					...prev,
+					[term]: {
+						...termObject,
+						[page]: dataToReduce.data.results
+					}
+				};
+			}
+
+			function handleResults(data) {
+				let results = data.data.results;
+
+				if (results[0].hasOwnProperty('name') && term !== 'films') {
+					return data;
+				} else {
+					let dataWithNames = JSON.parse(JSON.stringify(data));
+					dataWithNames.data.results = [];
+
+					let item;
+					for (item of results) {
+						item['name'] = item.title;
+						dataWithNames.data.results.push(item);
+					}
+
+					dataWithNames.data.results.sort(
+						(a, b) => a.episode_id - b.episode_id
+					);
+
+					return dataWithNames;
+				}
+			}
+
 			const fetchData = async () => {
 				setError('');
 				setIsFetching(true);
@@ -96,7 +96,7 @@ const useSwApi = () => {
 				if (term && page) fetchData();
 			}
 		},
-		[ term, page ]
+		[ term, page, data ]
 	);
 
 	return [

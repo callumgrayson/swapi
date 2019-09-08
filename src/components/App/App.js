@@ -10,7 +10,7 @@ import V5 from '../v5/v5/V5';
 import './App.css';
 
 function App() {
-	const [ version, setVersion ] = useState('5');
+	const [ version, setVersion ] = useState('0');
 
 	const handleChange = (e) => {
 		setVersion(e.target.value);

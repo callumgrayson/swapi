@@ -58,7 +58,7 @@ const useSwApi = () => {
 				}
 			});
 		},
-		[ requestForSingles ]
+		[ requestForSingles, data ]
 	);
 
 	return [ data, setRequestForSingles ];

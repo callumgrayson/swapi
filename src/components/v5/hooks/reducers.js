@@ -2,6 +2,13 @@ export function getItemId(category, itemNumber) {
 	return `${category}_${itemNumber}`;
 }
 
+export function getUrlInfo(url) {
+	const [ category, idNumber ] = url
+		.replace('https://swapi.co/api/', '')
+		.split('/');
+	return [ category, idNumber ];
+}
+
 export function singleReducer(
 	prev,
 	{ category, itemNumber, isFetching, error, data }
@@ -20,7 +27,6 @@ export function singleReducer(
 		newItem.error = error;
 	}
 	if (data) {
-		// console.log('data', data);
 		newItem.data = data;
 	}
 
