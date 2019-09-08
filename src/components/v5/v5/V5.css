@@ -1,0 +1,15 @@
+.v5_singles-box {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.v5_single-item {
+	padding: 0 .5rem;
+	margin: .1rem .5rem;
+	background-color: #111;
+	border-radius: 3px;
+}
+
+.v5_single-item:hover {
+	cursor: pointer;
+}

@@ -57,7 +57,7 @@ const getRenderObj = (inObj) => {
 		return val.includes('https://swapi.co/api/') ? true : false;
 	};
 
-	Object.keys(inObj).map((item) => {
+	Object.keys(inObj).forEach((item) => {
 		if (item === 'name') {
 			outObj[item] = inObj[item];
 		} else if (item === 'opening_crawl') {
@@ -110,29 +110,6 @@ const renderCrawl = (inObj) => {
 	);
 };
 
-const renderLists = (inObj) => {
-	return (
-		<React.Fragment>
-			{Object.keys(inObj).map((objKey) => {
-				return (
-					inObj[objKey].length > 0 && (
-						<div key={uuid()} className="v3-ListBox">
-							<div className="vv3-detailKey">
-								{formatText(objKey)}
-							</div>
-							{inObj[objKey].map((item) => (
-								<div key={uuid()} className="v3-detailValue">
-									{typeof item === 'string' ? item : 'url'}
-								</div>
-							))}
-						</div>
-					)
-				);
-			})}
-		</React.Fragment>
-	);
-};
-
 const renderSingles = (inObj) => {
 	return (
 		<div className="v3-columns-box">
@@ -162,14 +139,13 @@ const renderSingles = (inObj) => {
 const Detail = (props) => {
 	const detailObj = props.detail;
 
-	const { name, singles, lists, technical, crawl } = getRenderObj(detailObj);
+	const { name, singles, crawl } = getRenderObj(detailObj);
 
 	return (
 		<div className="v3-detail-box">
 			<h2>{name}</h2>
 			{singles && renderSingles(singles)}
 			{crawl && renderCrawl(crawl)}
-			{/* {lists && renderLists(lists)} */}
 		</div>
 	);
 };
