@@ -2,39 +2,9 @@ import { useEffect, useState } from 'react';
 import { getItemId, getUrlInfo, getUrlIdsFromItem } from '../helpers/helpers';
 import { fetchSingle, fetchPage } from '../helpers/fetchData';
 import { initialSingle } from '../helpers/reducers';
+import CONSTANTS from '../../../constants.json';
 
-const initialDataState = {
-	films: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	people: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	planets: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	species: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	starships: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	vehicles: {
-		count: 0,
-		pages: {},
-		items: {}
-	}
-};
+const initialDataState = CONSTANTS.initialDataState;
 
 const useSwApi = () => {
 	const [ data, setData ] = useState(initialDataState);
@@ -88,15 +58,12 @@ const useSwApi = () => {
 					data.hasOwnProperty(category) &&
 					!data[category].pages.hasOwnProperty(pageNumber)
 				) {
-					console.log('category, pageNumber', category, pageNumber);
 					fetchPage(
 						{ setData, setError, setIsFetching },
 						{ category, pageNumber }
 					);
 				}
 			}
-
-			// console.log('Sync requestForPage');
 		},
 		[ requestForPage, data ]
 	);
@@ -232,7 +199,7 @@ const useSwApi = () => {
 								}
 							} else {
 								itemFromData = {
-									itemName: '...',
+									itemName: '',
 									url: url
 								};
 							}

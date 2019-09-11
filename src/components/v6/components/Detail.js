@@ -1,69 +1,42 @@
 import React from 'react';
-import { urlCatsByTerm } from '../helpers/helpers';
+import { capitalize } from '../helpers/helpers';
+
+const uuid = require('uuid/v4');
+
+const prepareDetail = (inObj) => {
+	let outObj = {};
+	Object.keys(inObj).forEach((key) => {
+		// let newKey = removeUnderscores(key);
+		let newKey = key.split('_').map((word) => capitalize(word)).join(' ');
+		outObj[newKey] = inObj[key];
+	});
+	// console.log('outObj', outObj);
+	return outObj;
+};
 
 const Detail = (props) => {
-	// console.log('props', props);
-	const { currentItem, itemData } = props;
-	const detailData = itemData;
-	// return (
-	// 	<div>
-	// 		{itemData &&
-	// 			itemData.hasOwnProperty['name'] &&
-	// 			JSON.stringify(itemData)}
-	// 	</div>
-	// );
+	const {
+		// currentItem,
+		itemData
+	} = props;
+	const inData = itemData;
 
-	const renderPreparedDetail = (inObj) => {
-		// console.log('in renderPreparedDetail...');
-
-		const keyConvert = [ 'pilots', 'residents', 'characters' ];
-
-		let singles = [];
-		let arrays = [];
-
-		Object.keys(inObj).forEach((keyInObj) => {
-			if ([ 'created', 'edited', 'url' ].includes(keyInObj)) {
-				return;
-			}
-			if (keyInObj === 'name') {
-				singles.unshift({ [keyInObj]: inObj[keyInObj] });
-			} else if (urlCatsByTerm.includes(keyInObj)) {
-				let dataKey = keyInObj;
-				if (keyConvert.includes(keyInObj)) {
-					dataKey = 'people';
-				}
-				if (keyInObj === 'homeworld') {
-					dataKey = 'planets';
-				}
-				let arrayItems = inObj[keyInObj];
-				let returnItems = [];
-				arrayItems.forEach((item) => {
-					returnItems.push({ name: '', id: item });
-				});
-				arrays.push({ [keyInObj]: [ ...returnItems ] });
-			} else {
-				singles.push({ [keyInObj]: inObj[keyInObj] });
-			}
-		});
-
-		return [ ...singles, ...arrays ];
-	};
+	const detailData = prepareDetail(inData);
 
 	return (
-		<div>
+		<div className="v6_detail">
 			<div>
 				{Object.entries(detailData).map((el) => {
 					// el is an object
-					console.log('el', el);
 					if (Array.isArray(el[1])) {
-						console.log('el[1]', el[1]);
 						return (
-							<div className="v4_keyValBox">
-								<div className="v4_left">{el[0]}</div>
-								<div className="v4_right">
+							<div key={uuid()} className="v6_keyValBox">
+								<div className="v6_left">{el[0]}</div>
+								<div className="v6_right">
 									{el[1].map((valInside) => {
 										return (
 											<div
+												key={uuid()}
 												className={
 													valInside.itemName ? (
 														'visible'
@@ -85,9 +58,9 @@ const Detail = (props) => {
 						);
 					} else {
 						return (
-							<div className="v4_keyValBox">
-								<div className="v4_left">{el[0]}</div>
-								<div className="v4_right">{el[1]}</div>
+							<div key={uuid()} className="v6_keyValBox">
+								<div className="v6_left">{el[0]}</div>
+								<div className="v6_right">{el[1]}</div>
 							</div>
 						);
 					}

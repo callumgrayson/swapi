@@ -1,14 +1,14 @@
 import React from 'react';
+import CONSTANTS from '../../../constants.json';
 const uuid = require('uuid/v4');
 
-const categories = [
-	'films',
-	'people',
-	'planets',
-	'species',
-	'starships',
-	'vehicles'
-];
+let inCategories = CONSTANTS.categories;
+const categories = inCategories.map((cat) => {
+	return {
+		name: cat,
+		display: `${cat[0].toUpperCase()}${cat.slice(1)}`
+	};
+});
 
 const Categories = (props) => {
 	const {
@@ -16,10 +16,10 @@ const Categories = (props) => {
 		changeCategory
 	} = props;
 	return (
-		<div>
+		<div className="v6_terms">
 			{categories.map((cat) => (
-				<div key={uuid()} onClick={() => changeCategory(cat)}>
-					{cat}
+				<div key={uuid()} onClick={() => changeCategory(cat.name)}>
+					{cat.display}
 				</div>
 			))}
 		</div>

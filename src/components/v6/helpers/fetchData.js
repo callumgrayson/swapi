@@ -21,13 +21,11 @@ function handleSingleResults(data) {
 
 // *************************************************************
 function handlePageResults(data) {
-	console.log('data', data);
 	// data.data is the object the has count: next: previous: results: {keySingles: valueSingles}
 
 	if (data.data.results[0].hasOwnProperty('name')) {
 		return data;
 	} else {
-		// let dataWithNames = JSON.parse(JSON.stringify(data));
 		let dataWithNames = { ...data };
 		let results = data.data.results;
 
@@ -37,7 +35,6 @@ function handlePageResults(data) {
 		}
 
 		dataWithNames.data.results.sort((a, b) => a.episode_id - b.episode_id);
-		console.log('dataWithNames', dataWithNames);
 		return dataWithNames;
 	}
 }
@@ -105,7 +102,6 @@ export const fetchPage = async (
 	{ setData, setError, setIsFetching },
 	{ category, pageNumber }
 ) => {
-	console.log('category, pageNumber', category, pageNumber);
 	setError('');
 	setIsFetching(true);
 
@@ -131,7 +127,7 @@ export const fetchPage = async (
 		);
 	} catch (error) {
 		console.log('error', error);
-		// setError(JSON.stringify(error));
+		setError(JSON.stringify(error));
 	}
 
 	setIsFetching(false);

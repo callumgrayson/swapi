@@ -3,9 +3,13 @@ const uuid = require('uuid/v4');
 
 const Pages = (props) => {
 	// console.log('props', props);
-	const { pageItems, changeItem, currentPage } = props;
+	const {
+		pageItems,
+		changeItem
+		// currentPage
+	} = props;
 	return (
-		<div>
+		<div className="v6_menu">
 			{pageItems &&
 				pageItems.length > 0 &&
 				pageItems.map((item) => (
