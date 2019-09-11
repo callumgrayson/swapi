@@ -38,7 +38,11 @@ const V5 = () => {
 				} else if (error && error !== '') {
 					return <div>Error: {error}</div>;
 				} else if (inData && Object.keys(inData).length > 0) {
-					return <div>{inData.name}</div>;
+					return (
+						<div>
+							{inData.name} - {inData.created}
+						</div>
+					);
 				}
 			} else {
 				return <div>Nothing to show yet...</div>;
@@ -60,7 +64,7 @@ const V5 = () => {
 				<div
 					key={uuid()}
 					className="v5_single-item"
-					onClick={() => console.log('inItem', inItem)}
+					onClick={() => console.log('displayItem', displayItem)}
 				>
 					{renderSingle(displayItem)}
 				</div>

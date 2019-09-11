@@ -61,7 +61,7 @@ const getRenderObj = (inObj) => {
 		if (item === 'name') {
 			outObj[item] = inObj[item];
 		} else if (item === 'opening_crawl') {
-			console.log('inObj', inObj);
+			// console.log('inObj', inObj);
 			outObj['crawl'] = { [item]: inObj[item] };
 		} else if (technicalKeys.includes(item)) {
 			outObj.technical[item] = inObj[item];

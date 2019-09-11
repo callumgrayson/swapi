@@ -6,11 +6,12 @@ import V2 from '../v2/v2/V2';
 import V3 from '../v3/v3/V3';
 import V4 from '../v4/v4/V4';
 import V5 from '../v5/v5/V5';
+import V6 from '../v6/v6/V6';
 
 import './App.css';
 
 function App() {
-	const [ version, setVersion ] = useState('0');
+	const [ version, setVersion ] = useState('6');
 
 	const handleChange = (e) => {
 		setVersion(e.target.value);
@@ -26,6 +27,7 @@ function App() {
 				<option value="3">version 3</option>
 				<option value="4">version 4</option>
 				<option value="5">version 5</option>
+				<option value="6">version 6</option>
 			</select>
 			{/* </div> */}
 
@@ -35,6 +37,7 @@ function App() {
 			{version === '3' && <V3 setVersion={setVersion} />}
 			{version === '4' && <V4 setVersion={setVersion} />}
 			{version === '5' && <V5 setVersion={setVersion} />}
+			{version === '6' && <V6 setVersion={setVersion} />}
 		</div>
 	);
 }

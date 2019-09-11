@@ -1,6 +1,5 @@
 import { memoizedFetch } from '../helpers/api';
-import { singleReducer } from './reducers';
-import { getUrlInfo } from './reducers';
+import { getUrlInfo, singleReducer } from './reducers';
 
 const BASE_URL = 'https://swapi.co/api/';
 
@@ -44,6 +43,7 @@ export const fetchData = async (setData, { category, itemNumber }) => {
 		// ... results handler would go here if needed
 		const checkedData = handleResults(data);
 
+		// Set Data
 		setData((prev) =>
 			singleReducer(prev, {
 				category,
@@ -52,6 +52,7 @@ export const fetchData = async (setData, { category, itemNumber }) => {
 			})
 		);
 	} catch (error) {
+		// Set error
 		setData((prev) =>
 			singleReducer(prev, {
 				category,

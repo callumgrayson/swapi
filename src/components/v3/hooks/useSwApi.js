@@ -23,6 +23,7 @@ const useSwApi = () => {
 	useEffect(
 		() => {
 			function handleResults(data) {
+				console.log('data', data);
 				let results = data.data.results;
 
 				if (results[0].hasOwnProperty('name') && term !== 'films') {

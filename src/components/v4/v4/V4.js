@@ -85,9 +85,6 @@ const V4 = () => {
 					data[term].hasOwnProperty(`page_${page}`)
 				)
 			) {
-				// set count and results from allData
-				// if (term !== '' && page !== 0) {
-
 				// *****
 				// Here allData is used in place of fetching data
 				//
@@ -154,7 +151,6 @@ const V4 = () => {
 			const setByDataId = ({ dataId, data, dataTerm }) => {
 				// setter function simply takes the data and sets it in state
 				// with appropriate checks...
-				// console.log('dataId, data, dataTerm', dataId, data, dataTerm);
 
 				let newTermObject = {};
 
@@ -394,6 +390,7 @@ const V4 = () => {
 			Object.keys(data[term][dataId]).length > 0
 		) {
 			let detailData = data[term][dataId];
+			console.log('detailData', detailData);
 			return (
 				<div>
 					<div>
