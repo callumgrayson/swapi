@@ -26,6 +26,10 @@
 	background-color: black;
 }
 
+.v6_button:hover {
+	cursor: pointer;
+}
+
 .v6_terms {
 	width: max-content;
 	padding: 1rem 3rem;

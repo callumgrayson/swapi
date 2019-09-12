@@ -5,6 +5,7 @@ import Categories from '../displays/Categories';
 import Pages from '../displays/Pages';
 import PageLinks from '../displays/PageLinks';
 import Detail from '../displays/Detail';
+import Header from '../displays/Header';
 
 import './V6.css';
 import { getUrlInfo } from '../helpers/helpers';
@@ -60,7 +61,6 @@ const V6 = () => {
 		[ displayItem, setRequestForItem ]
 	);
 
-	const Header = () => <div>Header</div>;
 	const Content = (props) => (
 		<div className="v6_content">{props.children}</div>
 	);

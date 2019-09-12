@@ -12,6 +12,7 @@ const Pages = (props) => {
 					pageItems.length > 0 &&
 					pageItems.map((item) => (
 						<div
+							className="v6_button"
 							key={uuid()}
 							onClick={() => changeItem(item.itemId)}
 							style={{

@@ -16,6 +16,7 @@ const Categories = (props) => {
 		<div className="v6_terms">
 			{categories.map((cat) => (
 				<div
+					className="v6_button"
 					key={uuid()}
 					onClick={() => changeCategory(cat.name)}
 					style={{

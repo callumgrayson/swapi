@@ -14,6 +14,7 @@ const PageLinks = (props) => {
 				pageLinks.map((link) => {
 					return (
 						<span
+							className="v6_button"
 							style={{
 								color: `${currentPage === link
 									? CONSTANTS.SW_COLOR
