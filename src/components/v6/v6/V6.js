@@ -24,11 +24,6 @@ const V6 = () => {
 	// Page data sync
 	useEffect(
 		() => {
-			console.log(
-				'currentPageData, currentItemData',
-				currentPageData,
-				currentItemData
-			);
 			let { pageItems } = currentItemData;
 
 			let newDisplayPage = 1;
