@@ -25,8 +25,6 @@ function checkResponse(resp) {
 }
 
 async function fetchAPI(param) {
-	console.log('param', param);
-
 	try {
 		const headers = new Headers();
 		headers.append('Content-type', 'application/json');

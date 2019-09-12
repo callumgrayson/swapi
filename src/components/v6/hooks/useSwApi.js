@@ -2,39 +2,9 @@ import { useEffect, useState } from 'react';
 import { getItemId, getUrlInfo, getUrlIdsFromItem } from '../helpers/helpers';
 import { fetchSingle, fetchPage } from '../helpers/fetchData';
 import { initialSingle } from '../helpers/reducers';
+import CONSTANTS from '../../../constants.json';
 
-const initialDataState = {
-	films: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	people: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	planets: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	species: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	starships: {
-		count: 0,
-		pages: {},
-		items: {}
-	},
-	vehicles: {
-		count: 0,
-		pages: {},
-		items: {}
-	}
-};
+const initialDataState = CONSTANTS.initialDataState;
 
 const useSwApi = () => {
 	const [ data, setData ] = useState(initialDataState);
@@ -49,10 +19,11 @@ const useSwApi = () => {
 	const [ currentDisplayData, setCurrentDisplayData ] = useState({
 		currentPageData: {
 			pageItems: [], // array of {itemId: 'films_1', itemName: 'The Phantom Menace'}
-			pageLinks: [] // arrya of {pageNumber: 2, pageDisplay: 2}
+			pageLinks: [] // arraa of {pageNumber: 2, pageDisplay: 2}
 		},
 		currentItemData: {}
 	});
+	// let previousPageRef = useRef('');
 
 	// Sync with requestForSingles
 	useEffect(
@@ -88,15 +59,12 @@ const useSwApi = () => {
 					data.hasOwnProperty(category) &&
 					!data[category].pages.hasOwnProperty(pageNumber)
 				) {
-					console.log('category, pageNumber', category, pageNumber);
 					fetchPage(
 						{ setData, setError, setIsFetching },
 						{ category, pageNumber }
 					);
 				}
 			}
-
-			// console.log('Sync requestForPage');
 		},
 		[ requestForPage, data ]
 	);
@@ -131,6 +99,25 @@ const useSwApi = () => {
 			let currentPageData = {};
 			const { category, page } = requestForPage;
 
+			// if requestForPage is not same as current page
+			// remove currentItemData
+			// if (
+			// 	JSON.stringify(previousPageRef) !==
+			// 	JSON.stringify(requestForPage)
+			// ) {
+			// 	console.log(
+			// 		'previousPageRef, requestForPage',
+			// 		previousPageRef,
+			// 		requestForPage
+			// 	);
+			// 	setCurrentDisplayData((prev) => ({
+			// 		...prev,
+			// 		currentItemData: {}
+			// 	}));
+
+			// 	previousPageRef = requestForPage;
+			// }
+
 			// page reducer logic
 			if (isFetching) {
 				currentPageData = { isFetching };
@@ -140,7 +127,10 @@ const useSwApi = () => {
 				if (data.hasOwnProperty(category)) {
 					let dataCatKeys = Object.keys(data[category]);
 					if (dataCatKeys.includes('pages')) {
-						if (Object.keys(data[category].pages).length > 0) {
+						if (
+							Object.keys(data[category].pages).length > 0 &&
+							data[category].pages.hasOwnProperty(page)
+						) {
 							let itemIdsInPage = data[category].pages[page];
 
 							let pageDisplayArray = itemIdsInPage.map((id) => {
@@ -157,6 +147,19 @@ const useSwApi = () => {
 						}
 					}
 				}
+			}
+
+			// Get and set PageLinks
+			if (data[category] && data[category].count > 0) {
+				const count = data[category].count;
+				const numberOfPages = Math.ceil(count / 10);
+				const pageLinksArray = [];
+
+				for (let i = 1; i <= numberOfPages; i++) {
+					pageLinksArray.push(i);
+				}
+
+				currentPageData['pageLinks'] = pageLinksArray;
 			}
 
 			setCurrentDisplayData((prev) => ({
@@ -232,7 +235,7 @@ const useSwApi = () => {
 								}
 							} else {
 								itemFromData = {
-									itemName: '...',
+									itemName: '',
 									url: url
 								};
 							}

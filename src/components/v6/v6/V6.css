@@ -1,0 +1,75 @@
+.v6_page {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.v6_content {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 2rem;
+	min-height: 80vh;
+	width: 100%;
+	/* background: url('../../../img/vader-vector-hair.png');
+	background-size: cover;
+	background-color: rgb(10, 10, 8);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-blend-mode: multiply;
+	background-attachment: fixed; */
+}
+
+.v6_swLogo {
+	width: 100%;
+	height: 100px;
+	background-color: black;
+}
+
+.v6_terms {
+	width: max-content;
+	padding: 1rem 3rem;
+}
+
+.v6_menu {
+	height: 290px;
+	width: max-content;
+	min-width: 300px;
+	padding: 1rem 2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.v6_menuItems {
+	flex: 1;
+}
+
+.v6_pageLinks {
+}
+
+.v6_detail {
+	flex: 1;
+	padding: 1rem;
+}
+
+.v6_keyValBox {
+	display: flex;
+}
+
+.v6_left {
+	padding-right: 2rem;
+	width: 30%;
+	text-align: right;
+	word-wrap: break-word;
+}
+
+.v6_right {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.hidden {
+	color: transparent;
+}
