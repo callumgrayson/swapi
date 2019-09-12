@@ -33,7 +33,7 @@ export function getUrlInfo(url) {
 	return [ category, idNumber ];
 }
 
-const idFromUrl = (url) => {
+export const idFromUrl = (url) => {
 	// ** args: url<string>
 	// ** return: id<string>
 

@@ -11,14 +11,20 @@ const categories = inCategories.map((cat) => {
 });
 
 const Categories = (props) => {
-	const {
-		// currentCategory,
-		changeCategory
-	} = props;
+	const { currentCategory, changeCategory } = props;
 	return (
 		<div className="v6_terms">
 			{categories.map((cat) => (
-				<div key={uuid()} onClick={() => changeCategory(cat.name)}>
+				<div
+					key={uuid()}
+					onClick={() => changeCategory(cat.name)}
+					style={{
+						color: `${currentCategory === cat.name
+							? CONSTANTS.SW_COLOR
+							: 'inherit'}`,
+						margin: '0 .5rem'
+					}}
+				>
 					{cat.display}
 				</div>
 			))}

@@ -32,8 +32,19 @@
 }
 
 .v6_menu {
+	height: 290px;
 	width: max-content;
+	min-width: 300px;
 	padding: 1rem 2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.v6_menuItems {
+	flex: 1;
+}
+
+.v6_pageLinks {
 }
 
 .v6_detail {

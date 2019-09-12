@@ -19,10 +19,11 @@ const useSwApi = () => {
 	const [ currentDisplayData, setCurrentDisplayData ] = useState({
 		currentPageData: {
 			pageItems: [], // array of {itemId: 'films_1', itemName: 'The Phantom Menace'}
-			pageLinks: [] // arrya of {pageNumber: 2, pageDisplay: 2}
+			pageLinks: [] // arraa of {pageNumber: 2, pageDisplay: 2}
 		},
 		currentItemData: {}
 	});
+	// let previousPageRef = useRef('');
 
 	// Sync with requestForSingles
 	useEffect(
@@ -98,6 +99,25 @@ const useSwApi = () => {
 			let currentPageData = {};
 			const { category, page } = requestForPage;
 
+			// if requestForPage is not same as current page
+			// remove currentItemData
+			// if (
+			// 	JSON.stringify(previousPageRef) !==
+			// 	JSON.stringify(requestForPage)
+			// ) {
+			// 	console.log(
+			// 		'previousPageRef, requestForPage',
+			// 		previousPageRef,
+			// 		requestForPage
+			// 	);
+			// 	setCurrentDisplayData((prev) => ({
+			// 		...prev,
+			// 		currentItemData: {}
+			// 	}));
+
+			// 	previousPageRef = requestForPage;
+			// }
+
 			// page reducer logic
 			if (isFetching) {
 				currentPageData = { isFetching };
@@ -107,7 +127,10 @@ const useSwApi = () => {
 				if (data.hasOwnProperty(category)) {
 					let dataCatKeys = Object.keys(data[category]);
 					if (dataCatKeys.includes('pages')) {
-						if (Object.keys(data[category].pages).length > 0) {
+						if (
+							Object.keys(data[category].pages).length > 0 &&
+							data[category].pages.hasOwnProperty(page)
+						) {
 							let itemIdsInPage = data[category].pages[page];
 
 							let pageDisplayArray = itemIdsInPage.map((id) => {
@@ -124,6 +147,19 @@ const useSwApi = () => {
 						}
 					}
 				}
+			}
+
+			// Get and set PageLinks
+			if (data[category] && data[category].count > 0) {
+				const count = data[category].count;
+				const numberOfPages = Math.ceil(count / 10);
+				const pageLinksArray = [];
+
+				for (let i = 1; i <= numberOfPages; i++) {
+					pageLinksArray.push(i);
+				}
+
+				currentPageData['pageLinks'] = pageLinksArray;
 			}
 
 			setCurrentDisplayData((prev) => ({

@@ -1,5 +1,6 @@
 import React from 'react';
-import { capitalize } from '../helpers/helpers';
+import { capitalize, getUrlInfo } from '../helpers/helpers';
+import LoaderForItem from '../displays/LoaderForItem';
 
 const uuid = require('uuid/v4');
 
@@ -10,18 +11,28 @@ const prepareDetail = (inObj) => {
 		let newKey = key.split('_').map((word) => capitalize(word)).join(' ');
 		outObj[newKey] = inObj[key];
 	});
-	// console.log('outObj', outObj);
 	return outObj;
 };
 
 const Detail = (props) => {
-	const {
-		// currentItem,
-		itemData
-	} = props;
+	const { currentCategory, currentItem, itemData, pageItems } = props;
 	const inData = itemData;
 
 	const detailData = prepareDetail(inData);
+
+	if (
+		(currentItem &&
+			pageItems &&
+			pageItems.length > 0 &&
+			!Object.values(pageItems)
+				.map((i) => i.itemId)
+				.includes(currentItem)) ||
+		(currentCategory &&
+			itemData.hasOwnProperty('url') &&
+			getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
+	) {
+		return <div className="v6_detail" />;
+	}
 
 	return (
 		<div className="v6_detail">
@@ -37,19 +48,21 @@ const Detail = (props) => {
 										return (
 											<div
 												key={uuid()}
-												className={
-													valInside.itemName ? (
-														'visible'
-													) : (
-														'hidden'
-													)
-												}
 												onClick={() =>
 													console.log(
 														'needs a handler...'
 													)}
 											>
-												{valInside.itemName || '...'}
+												{valInside.isFetching && (
+													<LoaderForItem
+														item={valInside}
+													/>
+												)}
+												{!valInside.isFetching && (
+													<div className="v6_right-single">
+														{valInside.itemName}
+													</div>
+												)}
 											</div>
 										);
 									})}
