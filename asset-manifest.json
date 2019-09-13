@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/swapi/static/css/main.3ca821d5.chunk.css",
-    "main.js": "/swapi/static/js/main.7b1a9729.chunk.js",
-    "main.js.map": "/swapi/static/js/main.7b1a9729.chunk.js.map",
+    "main.css": "/swapi/static/css/main.331d8308.chunk.css",
+    "main.js": "/swapi/static/js/main.ffdf6f85.chunk.js",
+    "main.js.map": "/swapi/static/js/main.ffdf6f85.chunk.js.map",
     "runtime~main.js": "/swapi/static/js/runtime~main.1176b128.js",
     "runtime~main.js.map": "/swapi/static/js/runtime~main.1176b128.js.map",
-    "static/js/2.cbd1f437.chunk.js": "/swapi/static/js/2.cbd1f437.chunk.js",
-    "static/js/2.cbd1f437.chunk.js.map": "/swapi/static/js/2.cbd1f437.chunk.js.map",
+    "static/js/2.44f7d5fc.chunk.js": "/swapi/static/js/2.44f7d5fc.chunk.js",
+    "static/js/2.44f7d5fc.chunk.js.map": "/swapi/static/js/2.44f7d5fc.chunk.js.map",
     "index.html": "/swapi/index.html",
-    "precache-manifest.d6b52a801a4b99e79f0ffe2f64593ef7.js": "/swapi/precache-manifest.d6b52a801a4b99e79f0ffe2f64593ef7.js",
+    "precache-manifest.24536f03dcfd42e0ac101ff9de30d8aa.js": "/swapi/precache-manifest.24536f03dcfd42e0ac101ff9de30d8aa.js",
     "service-worker.js": "/swapi/service-worker.js",
-    "static/css/main.3ca821d5.chunk.css.map": "/swapi/static/css/main.3ca821d5.chunk.css.map",
+    "static/css/main.331d8308.chunk.css.map": "/swapi/static/css/main.331d8308.chunk.css.map",
     "static/media/Star_Wars_Logo.svg": "/swapi/static/media/Star_Wars_Logo.0a12a758.svg",
     "static/media/lightsaber_blue2.png": "/swapi/static/media/lightsaber_blue2.02916d98.png"
   }
