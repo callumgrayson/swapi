@@ -19,7 +19,7 @@ const Intro = ({ setVersion }) => {
 			<div className="intro__go-box">
 				<button
 					className="intro__go-button"
-					onClick={(e) => setVersion('5')}
+					onClick={(e) => setVersion('6')}
 					style={{
 						borderColor: `${appConstants.SW_COLOR}`
 					}}

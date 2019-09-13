@@ -1,24 +1,16 @@
 import React from 'react';
-import { capitalize, getUrlInfo } from '../helpers/helpers';
+import { getUrlInfo } from '../helpers/helpers';
 import LoaderForItem from '../displays/LoaderForItem';
+import { prepareItemData } from '../helpers/prepareItemData';
+import './Detail.css';
 
 const uuid = require('uuid/v4');
 
-const prepareDetail = (inObj) => {
-	let outObj = {};
-	Object.keys(inObj).forEach((key) => {
-		// let newKey = removeUnderscores(key);
-		let newKey = key.split('_').map((word) => capitalize(word)).join(' ');
-		outObj[newKey] = inObj[key];
-	});
-	return outObj;
-};
-
 const Detail = (props) => {
 	const { currentCategory, currentItem, itemData, pageItems } = props;
-	const inData = itemData;
+	const inData = { ...itemData };
 
-	const detailData = prepareDetail(inData);
+	const detailData = prepareItemData(inData);
 
 	if (
 		(currentItem &&
@@ -38,16 +30,18 @@ const Detail = (props) => {
 		<div className="v6_detail">
 			<div>
 				{Object.entries(detailData).map((el) => {
+					console.log('el', el);
 					// el is an object
 					if (Array.isArray(el[1])) {
 						return (
-							<div key={uuid()} className="v6_keyValBox">
-								<div className="v6_left">{el[0]}</div>
-								<div className="v6_right">
+							<div key={uuid()} className="v6_keyValArray">
+								<div className="v6_above">{el[0]}</div>
+								<div className="v6_below">
 									{el[1].map((valInside) => {
 										return (
 											<div
 												key={uuid()}
+												className="v6_array-single"
 												onClick={() =>
 													console.log(
 														'needs a handler...'
@@ -59,7 +53,7 @@ const Detail = (props) => {
 													/>
 												)}
 												{!valInside.isFetching && (
-													<div className="v6_right-single">
+													<div>
 														{valInside.itemName}
 													</div>
 												)}
@@ -69,11 +63,34 @@ const Detail = (props) => {
 								</div>
 							</div>
 						);
+					} else if (el[0] === 'Name') {
+						return (
+							<div key={uuid()} className="v6_nameBox">
+								<div className="v6_above">{el[1]}</div>
+							</div>
+						);
 					} else {
 						return (
-							<div key={uuid()} className="v6_keyValBox">
-								<div className="v6_left">{el[0]}</div>
-								<div className="v6_right">{el[1]}</div>
+							<div
+								key={uuid()}
+								className={`${el[0] === 'Opening Crawl'
+									? 'v6_openingCrawl'
+									: 'v6_keyValBox'}`}
+							>
+								<div
+									className={`${el[0] === 'Opening Crawl'
+										? 'v6_above'
+										: 'v6_left'}`}
+								>
+									{el[0]}
+								</div>
+								<div
+									className={`${el[0] === 'Opening Crawl'
+										? 'v6_below'
+										: 'v6_right'}`}
+								>
+									{el[1]}
+								</div>
 							</div>
 						);
 					}

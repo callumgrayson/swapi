@@ -1,0 +1,8 @@
+.v6_pageLink {
+	padding: 0 .5rem;
+}
+
+.v6_pageLink:hover {
+	background-color: #111;
+	cursor: pointer;
+}

@@ -1,0 +1,152 @@
+.v6_detail {
+	box-sizing: border-box;
+	flex: 1;
+	min-width: 600px;
+	padding: 1rem;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.v6_keyValBox {
+	display: flex;
+	border-radius: 4px;
+}
+
+.v6_left {
+	padding-right: 1rem;
+	width: 30%;
+	text-align: right;
+	word-wrap: break-word;
+}
+
+.v6_right {
+	width: 60%;
+	text-align: left;
+	padding-left: 1rem;
+}
+
+.v6_keyValArray,
+.v6_openingCrawl {
+	box-sizing: border-box;
+	border-radius: 4px;
+	margin: .5rem 0;
+	padding: 1rem;
+}
+
+.v6_above {
+	text-align: left;
+	margin-bottom: .5rem;
+	padding-top: .5rem;
+}
+
+.v6_below {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	justify-items: center;
+	text-align: left;
+}
+
+.v6_array-single {
+	box-sizing: border-box;
+	flex: 0 1 0;
+	min-width: 250px;
+	padding: .1rem 1rem;
+	text-align: start;
+	margin-left: 1rem;
+}
+
+.v6_array-single:hover {
+	color: #ffe82f;
+	cursor: pointer;
+}
+
+.v6_nameBox {
+	margin-bottom: .5rem;
+	padding-left: 1rem;
+}
+
+@media screen and (max-width: 1100px) {
+	.v6_detail {
+		width: 100%;
+		padding: 1rem;
+		height: auto;
+		overflow-y: none;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.v6_detail {
+		width: 100%;
+		min-width: 300px;
+		height: auto;
+		overflow-y: none;
+	}
+}
+
+@media screen and (max-width: 605px) {
+	.v6_openingCrawl {
+		box-sizing: border-box;
+		margin: .5rem 0;
+		padding: 1rem 0;
+		width: 100%;
+	}
+
+	.v6_left {
+		text-align: right;
+		word-wrap: break-word;
+	}
+
+	.v6_right {
+		text-align: left;
+	}
+
+	.v6_keyValArray {
+		flex-direction: column;
+	}
+
+	.v6_below {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		justify-items: center;
+		text-align: left;
+	}
+
+	.v6_array-single {
+		box-sizing: border-box;
+		/* flex: 0 1 0; */
+		min-width: 200px;
+		padding: .1rem 1rem;
+		text-align: start;
+		margin-left: 1rem;
+	}
+
+	.v6_keyValBox {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		border-radius: 4px;
+		margin: 0;
+		padding: .3rem 1rem;
+		/* background-color: #111; */
+	}
+
+	.v6_left {
+		padding-right: 1rem;
+		width: max-content;
+		text-align: left;
+		word-wrap: break-word;
+	}
+
+	.v6_right {
+		width: max-content;
+		text-align: center;
+		padding-left: 1rem;
+	}
+}

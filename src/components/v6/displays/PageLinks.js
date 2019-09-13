@@ -1,4 +1,5 @@
 import React from 'react';
+import './PageLinks.css';
 
 import CONSTANTS from '../../../constants.json';
 const uuid = require('uuid/v4');
@@ -14,12 +15,11 @@ const PageLinks = (props) => {
 				pageLinks.map((link) => {
 					return (
 						<span
-							className="v6_button"
+							className="v6_button v6_pageLink"
 							style={{
 								color: `${currentPage === link
 									? CONSTANTS.SW_COLOR
-									: 'inherit'}`,
-								margin: '0 .5rem'
+									: 'inherit'}`
 							}}
 							key={uuid()}
 							value={link}
