@@ -117,11 +117,9 @@ export const fetchPage = async (
 	try {
 		const data = await memoizedFetch(url, config);
 		// data is handledResponse - could be data or error inside
-		// console.log('data', data);
 
 		const dataToSet = handlePageResults(data);
 
-		// console.log('dataToSet', dataToSet);
 		setData((prev) =>
 			pageReducer(prev, { category, data: dataToSet, page: pageNumber })
 		);

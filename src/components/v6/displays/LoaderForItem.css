@@ -1,7 +1,7 @@
 .v6_loader-box {
 	box-sizing: border-box;
 	height: 1.6rem;
-	width: 100%;
+	width: 50px;
 	/* background-color: dimgray; */
 	padding: .2rem 0;
 }
@@ -9,8 +9,9 @@
 .v6_loader-bar {
 	margin-top: .5rem;
 	height: .4rem;
-	animation: grow 5s ease forwards;
+	animation: grow 5s ease-in-out forwards;
 	background-color: #ffe82f;
+	opacity: .1;
 }
 
 @keyframes grow {

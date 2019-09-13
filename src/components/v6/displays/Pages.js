@@ -18,8 +18,7 @@ const Pages = (props) => {
 							style={{
 								color: `${currentItem === item.itemId
 									? CONSTANTS.SW_COLOR
-									: 'inherit'}`,
-								margin: '0 .5rem'
+									: 'inherit'}`
 							}}
 						>
 							{item.itemName}

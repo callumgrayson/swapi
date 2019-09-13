@@ -45,7 +45,7 @@ const useSwApi = () => {
 				}
 			});
 		},
-		[ requestForSingles, data ]
+		[ requestForSingles ]
 	);
 
 	// Sync with requestForPage - Fetch
@@ -66,7 +66,7 @@ const useSwApi = () => {
 				}
 			}
 		},
-		[ requestForPage, data ]
+		[ requestForPage ]
 	);
 
 	// Sync with requestForItem - To get the Urls to fetch
@@ -89,7 +89,7 @@ const useSwApi = () => {
 				setRequestForSingles(urlsArray);
 			}
 		},
-		[ requestForItem, data ]
+		[ requestForItem ]
 	);
 
 	// Sync currentDisplayData with data

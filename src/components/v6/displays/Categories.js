@@ -16,14 +16,13 @@ const Categories = (props) => {
 		<div className="v6_terms">
 			{categories.map((cat) => (
 				<div
-					className="v6_button"
+					className="v6_button v6_category"
 					key={uuid()}
 					onClick={() => changeCategory(cat.name)}
 					style={{
 						color: `${currentCategory === cat.name
 							? CONSTANTS.SW_COLOR
-							: 'inherit'}`,
-						margin: '0 .5rem'
+							: 'inherit'}`
 					}}
 				>
 					{cat.display}

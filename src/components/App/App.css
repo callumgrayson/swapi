@@ -10,9 +10,16 @@
 
 .select {
 	position: absolute;
-	top: 2px;
-	left: 1px;
-	padding: 0;
+	top: .5rem;
+	left: .5rem;
+
+	color: #ccc;
+	background-color: transparent;
+	border: 2px solid #999;
+	padding: .5rem 1rem;
+	border-radius: .2rem;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	letter-spacing: .1rem;
 }
 
 select:active {
@@ -20,4 +27,9 @@ select:active {
 }
 select:focus {
 	outline: none;
+}
+
+option {
+	background-color: #222;
+	letter-spacing: .1rem;
 }

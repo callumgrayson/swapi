@@ -8,16 +8,14 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	padding: 2rem;
+	padding: 1rem;
 	min-height: 80vh;
 	width: 100%;
-	/* background: url('../../../img/vader-vector-hair.png');
-	background-size: cover;
-	background-color: rgb(10, 10, 8);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-blend-mode: multiply;
-	background-attachment: fixed; */
+	height: calc(100vh - 120px);
+}
+
+div {
+	cursor: default;
 }
 
 .v6_swLogo {
@@ -26,54 +24,103 @@
 	background-color: black;
 }
 
+.v6_button {
+	padding: 0 .5rem;
+}
 .v6_button:hover {
+	background-color: #111;
 	cursor: pointer;
 }
 
 .v6_terms {
+	box-sizing: border-box;
 	width: max-content;
 	padding: 1rem 3rem;
+	text-align: left;
 }
 
 .v6_menu {
 	height: 290px;
 	width: max-content;
-	min-width: 300px;
+	min-width: 240px;
 	padding: 1rem 2rem;
 	display: flex;
 	flex-direction: column;
+	text-align: left;
 }
 
 .v6_menuItems {
 	flex: 1;
 }
 
-.v6_pageLinks {
-}
-
-.v6_detail {
-	flex: 1;
-	padding: 1rem;
-}
-
-.v6_keyValBox {
-	display: flex;
-}
-
-.v6_left {
-	padding-right: 2rem;
-	width: 30%;
-	text-align: right;
-	word-wrap: break-word;
-}
-
-.v6_right {
-	width: 60%;
-	display: flex;
-	flex-direction: column;
-	text-align: left;
-}
-
 .hidden {
 	color: transparent;
+}
+
+@media screen and (max-width: 1100px) {
+	.v6_content {
+		justify-content: space-evenly;
+		height: auto;
+		padding: 0 10%;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.v6_content {
+		justify-content: space-evenly;
+		height: auto;
+		padding: 0;
+		flex-direction: row;
+	}
+}
+
+@media screen and (max-width: 605px) {
+	.v6_content {
+		justify-content: space-evenly;
+		height: auto;
+		padding: 0;
+		flex-direction: column;
+	}
+
+	.v6_terms {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		display: flex;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+
+	.v6_menu {
+		height: auto;
+		width: 100%;
+		min-width: 140px;
+		padding: 1rem 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.v6_swLogo {
+		width: auto;
+		height: 100px;
+		background-color: black;
+		/* display: flex;
+		justify-content: flex-end; */
+		float: right;
+		margin-right: 15px;
+	}
+
+	.v6_button {
+		padding: 0 .6rem;
+	}
+
+	.v6_category {
+		background-color: #111;
+		margin: .2rem;
+		padding: .3rem .6rem;
+		border-radius: 4px;
+	}
 }
