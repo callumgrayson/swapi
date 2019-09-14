@@ -20,25 +20,7 @@ const Detail = (props) => {
 
 	if (isFetching) {
 		return <div />;
-	}
-
-	console.log('itemData', itemData);
-
-	if (
-		(currentItem &&
-			pageItems &&
-			pageItems.length > 0 &&
-			!Object.values(pageItems)
-				.map((i) => i.itemId)
-				.includes(currentItem)) ||
-		(currentCategory &&
-			itemData.hasOwnProperty('url') &&
-			getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
-	) {
-		return <div />;
-	}
-
-	if (
+	} else if (
 		currentCategory &&
 		itemData.hasOwnProperty('url') &&
 		getUrlInfo(itemData.url[0].url)[0] === currentCategory
