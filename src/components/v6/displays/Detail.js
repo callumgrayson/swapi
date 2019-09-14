@@ -7,24 +7,34 @@ import './Detail.css';
 const uuid = require('uuid/v4');
 
 const Detail = (props) => {
-	const { currentCategory, currentItem, itemData, pageItems } = props;
+	const {
+		currentCategory,
+		currentItem,
+		itemData,
+		pageItems,
+		isFetching
+	} = props;
 	const inData = { ...itemData };
 
 	const detailData = prepareItemData(inData);
 
-	if (
-		(currentItem &&
-			pageItems &&
-			pageItems.length > 0 &&
-			!Object.values(pageItems)
-				.map((i) => i.itemId)
-				.includes(currentItem)) ||
-		(currentCategory &&
-			itemData.hasOwnProperty('url') &&
-			getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
-	) {
-		return <div className="v6_detail" />;
+	if (isFetching) {
+		return <div />;
 	}
+
+	// if (
+	// 	(currentItem &&
+	// 		pageItems &&
+	// 		pageItems.length > 0 &&
+	// 		!Object.values(pageItems)
+	// 			.map((i) => i.itemId)
+	// 			.includes(currentItem)) ||
+	// 	(currentCategory &&
+	// 		itemData.hasOwnProperty('url') &&
+	// 		getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
+	// ) {
+	// 	return <div className="v6_detail" />;
+	// }
 
 	return (
 		<div className="v6_detail">

@@ -17,7 +17,9 @@ const V6 = () => {
 	const [
 		{ currentPageData, currentItemData },
 		setRequestForPage,
-		setRequestForItem
+		setRequestForItem,
+		error,
+		isFetching
 	] = useSwApi();
 
 	// Page data sync
@@ -522,6 +524,8 @@ const V6 = () => {
 					currentItem={displayItem}
 					pageItems={currentPageData.pageItems}
 					changeItem={setDisplayItem}
+					error={error}
+					isFetching={isFetching}
 				>
 					<PageLinks
 						currentPage={displayPage}
@@ -534,6 +538,7 @@ const V6 = () => {
 					currentItem={displayItem}
 					itemData={currentItemData}
 					pageItems={currentPageData.pageItems}
+					isFetching={isFetching}
 				/>
 			</Content>
 		</div>

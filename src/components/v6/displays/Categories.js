@@ -1,5 +1,6 @@
 import React from 'react';
 import CONSTANTS from '../../../constants.json';
+
 const uuid = require('uuid/v4');
 
 let inCategories = CONSTANTS.categories;
@@ -12,6 +13,7 @@ const categories = inCategories.map((cat) => {
 
 const Categories = (props) => {
 	const { currentCategory, changeCategory } = props;
+
 	return (
 		<div className="v6_terms">
 			{categories.map((cat) => (
