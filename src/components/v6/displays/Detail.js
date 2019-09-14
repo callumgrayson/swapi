@@ -22,92 +22,101 @@ const Detail = (props) => {
 		return <div />;
 	}
 
-	// if (
-	// 	(currentItem &&
-	// 		pageItems &&
-	// 		pageItems.length > 0 &&
-	// 		!Object.values(pageItems)
-	// 			.map((i) => i.itemId)
-	// 			.includes(currentItem)) ||
-	// 	(currentCategory &&
-	// 		itemData.hasOwnProperty('url') &&
-	// 		getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
-	// ) {
-	// 	return <div className="v6_detail" />;
-	// }
+	console.log('itemData', itemData);
 
-	return (
-		<div className="v6_detail">
-			<div>
-				{Object.entries(detailData).map((el) => {
-					console.log('el', el);
-					// el is an object
-					if (Array.isArray(el[1])) {
-						return (
-							<div key={uuid()} className="v6_keyValArray">
-								<div className="v6_above">{el[0]}</div>
-								<div className="v6_below">
-									{el[1].map((valInside) => {
-										return (
-											<div
-												key={uuid()}
-												className="v6_array-single"
-												onClick={() =>
-													console.log(
-														'needs a handler...'
+	if (
+		(currentItem &&
+			pageItems &&
+			pageItems.length > 0 &&
+			!Object.values(pageItems)
+				.map((i) => i.itemId)
+				.includes(currentItem)) ||
+		(currentCategory &&
+			itemData.hasOwnProperty('url') &&
+			getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
+	) {
+		return <div />;
+	}
+
+	if (
+		currentCategory &&
+		itemData.hasOwnProperty('url') &&
+		getUrlInfo(itemData.url[0].url)[0] === currentCategory
+	) {
+		return (
+			<div className="v6_detail">
+				<div>
+					{Object.entries(detailData).map((el) => {
+						// el is an object
+						if (Array.isArray(el[1])) {
+							return (
+								<div key={uuid()} className="v6_keyValArray">
+									<div className="v6_above">{el[0]}</div>
+									<div className="v6_below">
+										{el[1].map((valInside) => {
+											return (
+												<div
+													key={uuid()}
+													className="v6_array-single"
+													onClick={() =>
+														console.log(
+															'needs a handler...'
+														)}
+												>
+													{valInside.isFetching && (
+														<LoaderForItem
+															item={valInside}
+														/>
 													)}
-											>
-												{valInside.isFetching && (
-													<LoaderForItem
-														item={valInside}
-													/>
-												)}
-												{!valInside.isFetching && (
-													<div>
-														{valInside.itemName}
-													</div>
-												)}
-											</div>
-										);
-									})}
+													{!valInside.isFetching && (
+														<div>
+															{valInside.itemName}
+														</div>
+													)}
+												</div>
+											);
+										})}
+									</div>
 								</div>
-							</div>
-						);
-					} else if (el[0] === 'Name') {
-						return (
-							<div key={uuid()} className="v6_nameBox">
-								<div className="v6_above">{el[1]}</div>
-							</div>
-						);
-					} else {
-						return (
-							<div
-								key={uuid()}
-								className={`${el[0] === 'Opening Crawl'
-									? 'v6_openingCrawl'
-									: 'v6_keyValBox'}`}
-							>
+							);
+						} else if (el[0] === 'Name') {
+							return (
+								<div key={uuid()} className="v6_nameBox">
+									<div className="v6_above">{el[1]}</div>
+								</div>
+							);
+						} else {
+							return (
 								<div
+									key={uuid()}
 									className={`${el[0] === 'Opening Crawl'
-										? 'v6_above'
-										: 'v6_left'}`}
+										? 'v6_openingCrawl'
+										: 'v6_keyValBox'}`}
 								>
-									{el[0]}
+									<div
+										className={`${el[0] === 'Opening Crawl'
+											? 'v6_above'
+											: 'v6_left'}`}
+									>
+										{el[0]}
+									</div>
+									<div
+										className={`${el[0] === 'Opening Crawl'
+											? 'v6_below'
+											: 'v6_right'}`}
+									>
+										{el[1]}
+									</div>
 								</div>
-								<div
-									className={`${el[0] === 'Opening Crawl'
-										? 'v6_below'
-										: 'v6_right'}`}
-								>
-									{el[1]}
-								</div>
-							</div>
-						);
-					}
-				})}
+							);
+						}
+					})}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		return <div />;
+	}
 };
 
 export default Detail;
