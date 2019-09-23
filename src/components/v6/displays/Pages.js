@@ -11,8 +11,11 @@ const Pages = (props) => {
 		return <div>Error: {error}</div>;
 	} else if (isFetching) {
 		return (
-			<div className="v6_loaderBox">
-				<Loader />
+			<div className="v6_menu">
+				<div className="v6_menuItems">
+					<Loader />
+				</div>
+				{props.children}
 			</div>
 		);
 	} else {

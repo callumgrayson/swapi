@@ -5,9 +5,8 @@ import CONSTANTS from '../../../constants.json';
 const uuid = require('uuid/v4');
 
 const PageLinks = (props) => {
-	const { changePage, currentPage } = props;
+	const { changePage, currentPage, pageLinks } = props;
 
-	const { pageLinks } = props;
 	return (
 		<div className="v6_pageLinks">
 			{pageLinks &&
