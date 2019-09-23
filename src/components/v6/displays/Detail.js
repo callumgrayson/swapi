@@ -9,10 +9,10 @@ const uuid = require('uuid/v4');
 const Detail = (props) => {
 	const { currentCategory, currentItem, itemData, pageItems } = props;
 	const inData = { ...itemData };
-
 	const detailData = prepareItemData(inData);
 
 	if (
+		!currentItem ||
 		(currentItem &&
 			pageItems &&
 			pageItems.length > 0 &&
@@ -30,7 +30,6 @@ const Detail = (props) => {
 		<div className="v6_detail">
 			<div>
 				{Object.entries(detailData).map((el) => {
-					console.log('el', el);
 					// el is an object
 					if (Array.isArray(el[1])) {
 						return (
