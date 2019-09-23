@@ -51,55 +51,58 @@ const Detail = (props) => {
 													console.log(
 														'needs a handler...'
 													)}
-													{!valInside.isFetching && (
-														<div>
-															{valInside.itemName}
-														</div>
-													)}
-												</div>
-											);
-										})}
-									</div>
+											>
+												{valInside.isFetching && (
+													<LoaderForItem
+														item={valInside}
+													/>
+												)}
+												{!valInside.isFetching && (
+													<div>
+														{valInside.itemName}
+													</div>
+												)}
+											</div>
+										);
+									})}
 								</div>
-							);
-						} else if (el[0] === 'Name') {
-							return (
-								<div key={uuid()} className="v6_nameBox">
-									<div className="v6_above">{el[1]}</div>
-								</div>
-							);
-						} else {
-							return (
+							</div>
+						);
+					} else if (el[0] === 'Name') {
+						return (
+							<div key={uuid()} className="v6_nameBox">
+								<div className="v6_above">{el[1]}</div>
+							</div>
+						);
+					} else {
+						return (
+							<div
+								key={uuid()}
+								className={`${el[0] === 'Opening Crawl'
+									? 'v6_openingCrawl'
+									: 'v6_keyValBox'}`}
+							>
 								<div
-									key={uuid()}
 									className={`${el[0] === 'Opening Crawl'
-										? 'v6_openingCrawl'
-										: 'v6_keyValBox'}`}
+										? 'v6_above'
+										: 'v6_left'}`}
 								>
-									<div
-										className={`${el[0] === 'Opening Crawl'
-											? 'v6_above'
-											: 'v6_left'}`}
-									>
-										{el[0]}
-									</div>
-									<div
-										className={`${el[0] === 'Opening Crawl'
-											? 'v6_below'
-											: 'v6_right'}`}
-									>
-										{el[1]}
-									</div>
+									{el[0]}
 								</div>
-							);
-						}
-					})}
-				</div>
+								<div
+									className={`${el[0] === 'Opening Crawl'
+										? 'v6_below'
+										: 'v6_right'}`}
+								>
+									{el[1]}
+								</div>
+							</div>
+						);
+					}
+				})}
 			</div>
-		);
-	} else {
-		return <div />;
-	}
+		</div>
+	);
 };
 
 export default Detail;
