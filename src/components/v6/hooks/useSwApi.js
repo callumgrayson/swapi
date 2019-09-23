@@ -258,7 +258,13 @@ const useSwApi = () => {
 		[ data, requestForItem ]
 	);
 
-	return [ currentDisplayData, setRequestForPage, setRequestForItem ];
+	return [
+		currentDisplayData,
+		setRequestForPage,
+		setRequestForItem,
+		error,
+		isFetching
+	];
 };
 
 export default useSwApi;

@@ -7,7 +7,13 @@ import './Detail.css';
 const uuid = require('uuid/v4');
 
 const Detail = (props) => {
-	const { currentCategory, currentItem, itemData, pageItems } = props;
+	const {
+		currentCategory,
+		currentItem,
+		itemData,
+		pageItems,
+		isFetching
+	} = props;
 	const inData = { ...itemData };
 	const detailData = prepareItemData(inData);
 
@@ -45,58 +51,55 @@ const Detail = (props) => {
 													console.log(
 														'needs a handler...'
 													)}
-											>
-												{valInside.isFetching && (
-													<LoaderForItem
-														item={valInside}
-													/>
-												)}
-												{!valInside.isFetching && (
-													<div>
-														{valInside.itemName}
-													</div>
-												)}
-											</div>
-										);
-									})}
+													{!valInside.isFetching && (
+														<div>
+															{valInside.itemName}
+														</div>
+													)}
+												</div>
+											);
+										})}
+									</div>
 								</div>
-							</div>
-						);
-					} else if (el[0] === 'Name') {
-						return (
-							<div key={uuid()} className="v6_nameBox">
-								<div className="v6_above">{el[1]}</div>
-							</div>
-						);
-					} else {
-						return (
-							<div
-								key={uuid()}
-								className={`${el[0] === 'Opening Crawl'
-									? 'v6_openingCrawl'
-									: 'v6_keyValBox'}`}
-							>
+							);
+						} else if (el[0] === 'Name') {
+							return (
+								<div key={uuid()} className="v6_nameBox">
+									<div className="v6_above">{el[1]}</div>
+								</div>
+							);
+						} else {
+							return (
 								<div
+									key={uuid()}
 									className={`${el[0] === 'Opening Crawl'
-										? 'v6_above'
-										: 'v6_left'}`}
+										? 'v6_openingCrawl'
+										: 'v6_keyValBox'}`}
 								>
-									{el[0]}
+									<div
+										className={`${el[0] === 'Opening Crawl'
+											? 'v6_above'
+											: 'v6_left'}`}
+									>
+										{el[0]}
+									</div>
+									<div
+										className={`${el[0] === 'Opening Crawl'
+											? 'v6_below'
+											: 'v6_right'}`}
+									>
+										{el[1]}
+									</div>
 								</div>
-								<div
-									className={`${el[0] === 'Opening Crawl'
-										? 'v6_below'
-										: 'v6_right'}`}
-								>
-									{el[1]}
-								</div>
-							</div>
-						);
-					}
-				})}
+							);
+						}
+					})}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		return <div />;
+	}
 };
 
 export default Detail;
