@@ -17,11 +17,9 @@ import {
 // Order to singles, opening-crawl, arrays (films last)
 
 export const prepareItemData = (initObj) => {
-	console.log('initObj', initObj);
 	let outObj = {};
 
 	let inObj = orderByKeyGroups(initObj);
-	console.log('inObj', inObj);
 
 	Object.keys(inObj).forEach((key) => {
 		let val = inObj[key];
@@ -51,6 +49,5 @@ export const prepareItemData = (initObj) => {
 		}
 	});
 
-	console.log('outObj', outObj);
 	return outObj;
 };

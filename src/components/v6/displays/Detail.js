@@ -15,40 +15,41 @@ const Detail = (props) => {
 		isFetching
 	} = props;
 	const inData = { ...itemData };
-
 	const detailData = prepareItemData(inData);
 
-	if (isFetching) {
-		return <div />;
-	} else if (
-		currentCategory &&
-		itemData.hasOwnProperty('url') &&
-		getUrlInfo(itemData.url[0].url)[0] === currentCategory
+	if (
+		!currentItem ||
+		(currentItem &&
+			pageItems &&
+			pageItems.length > 0 &&
+			!Object.values(pageItems)
+				.map((i) => i.itemId)
+				.includes(currentItem)) ||
+		(currentCategory &&
+			itemData.hasOwnProperty('url') &&
+			getUrlInfo(itemData.url[0].url)[0] !== currentCategory)
 	) {
-		return (
-			<div className="v6_detail">
-				<div>
-					{Object.entries(detailData).map((el) => {
-						// el is an object
-						if (Array.isArray(el[1])) {
-							return (
-								<div key={uuid()} className="v6_keyValArray">
-									<div className="v6_above">{el[0]}</div>
-									<div className="v6_below">
-										{el[1].map((valInside) => {
-											return (
-												<div
-													key={uuid()}
-													className="v6_array-single"
-													onClick={() =>
-														console.log(
-															'needs a handler...'
-														)}
-												>
-													{valInside.isFetching && (
-														<LoaderForItem
-															item={valInside}
-														/>
+		return <div className="v6_detail" />;
+	}
+
+	return (
+		<div className="v6_detail">
+			<div>
+				{Object.entries(detailData).map((el) => {
+					// el is an object
+					if (Array.isArray(el[1])) {
+						return (
+							<div key={uuid()} className="v6_keyValArray">
+								<div className="v6_above">{el[0]}</div>
+								<div className="v6_below">
+									{el[1].map((valInside) => {
+										return (
+											<div
+												key={uuid()}
+												className="v6_array-single"
+												onClick={() =>
+													console.log(
+														'needs a handler...'
 													)}
 													{!valInside.isFetching && (
 														<div>
