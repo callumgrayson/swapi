@@ -11,7 +11,7 @@
 	height: .4rem;
 	animation: grow 5s ease-in-out forwards;
 	background-color: #ffe82f;
-	opacity: .1;
+	opacity: .5;
 }
 
 @keyframes grow {
